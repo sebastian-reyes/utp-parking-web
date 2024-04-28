@@ -1,0 +1,37 @@
+.footer .footer-info {
+  margin-bottom: 30px;
+}
+
+.footer .footer-info p {
+  margin-bottom: 20px;
+  padding-right: 80px;
+}
+
+.footer .footer-logo {
+  margin-bottom: 20px;
+  display: block;
+}
+
+.footer .footer-widget {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.footer .footer-widget h3 {
+  font-size: 15px;
+  color: #111;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.footer .footer-widget ul li a {
+  text-decoration: none;
+  font-size: 14px;
+  color: #666;
+}
+
+.footer .footer-widget ul li a:hover {
+  color: #000000;
+  font-weight: 600;
+}

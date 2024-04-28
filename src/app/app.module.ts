@@ -10,6 +10,7 @@ import { CarouselComponent } from './pages/users/carousel/carousel.component';
 import { SliderComponent } from './pages/users/slider/slider.component';
 import { CarscardComponent } from './pages/users/carscard/carscard.component';
 import { InfoaditionalComponent } from './pages/users/infoaditional/infoaditional.component';
+import { FooterComponent } from './pages/users/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { InfoaditionalComponent } from './pages/users/infoaditional/infoaditiona
     CarouselComponent,
     SliderComponent,
     CarscardComponent,
-    InfoaditionalComponent
+    InfoaditionalComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
