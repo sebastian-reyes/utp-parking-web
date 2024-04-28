@@ -1,0 +1,11 @@
+.carousel-control-next-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="%2316024F" d="M5.354 2.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 9 5.354 4.061a.5.5 0 0 1 0-.708z"%3E%3C/path%3E%3C/svg%3E');
+}
+
+.carousel-control-prev-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="%2316024F" d="M10.646 2.646a.5.5 0 0 1 0 .708L4.293 9l6.353 6.354a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"%3E%3C/path%3E%3C/svg%3E');
+}
+
+.carousel-indicators [data-bs-target]{
+    background-color: #16024F;
+}
