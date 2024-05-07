@@ -11,6 +11,10 @@ import { SliderComponent } from './pages/users/slider/slider.component';
 import { CarscardComponent } from './pages/users/carscard/carscard.component';
 import { InfoaditionalComponent } from './pages/users/infoaditional/infoaditional.component';
 import { FooterComponent } from './pages/users/footer/footer.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
+import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -22,13 +26,26 @@ import { FooterComponent } from './pages/users/footer/footer.component';
     SliderComponent,
     CarscardComponent,
     InfoaditionalComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

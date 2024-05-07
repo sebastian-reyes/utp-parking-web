@@ -1,39 +1,11 @@
-<div class="row p-2">
-  <div class="col-md-4 mt-3">
+<div *ngIf="userLoginOn" class="row p-2">
+  <div *ngFor="let sede of sedes" class="col-md-4 mt-3">
     <div class="card border-light shadow-sm rounded">
       <div class="card-body">
-        <h5 class="card-title fw-bold">Sede Arequipa</h5>
-        <h6 class="card-subtitle mb-3 text-muted">Av. arequipa 265 - 279</h6>
-        <p class="text-danger text-center fw-bold">
-          Espacios disponibles 5/50 <i class='bx bxs-car'></i>
-        </p>
-        <div class="text-center">
-          <a href="#" class="card-link text-purple">Ver en el mapa <i class='bx bxs-map'></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 mt-3">
-    <div class="card border-light shadow-sm rounded">
-      <div class="card-body">
-        <h5 class="card-title fw-bold">Sede Petit Thouars</h5>
-        <h6 class="card-subtitle mb-3 text-muted">Av. Petit Thouars 383 - 385</h6>
-        <p class="text-warning text-center fw-bold">
-          Espacios disponibles 25/50 <i class='bx bxs-car'></i>
-        </p>
-        <div class="text-center">
-          <a href="#" class="card-link text-purple">Ver en el mapa <i class='bx bxs-map'></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-4 mt-3">
-    <div class="card border-light shadow-sm rounded">
-      <div class="card-body">
-        <h5 class="card-title fw-bold">Sede Pacífico</h5>
-        <h6 class="card-subtitle mb-3 text-muted">Av. arequipa 660</h6>
+        <h5 class="card-title fw-bold">{{sede.nombre}}</h5>
+        <h6 class="card-subtitle mb-3 text-muted">{{sede.direccion}}</h6>
         <p class="text-success text-center fw-bold">
-          Espacios disponibles 40/50 <i class='bx bxs-car'></i>
+          Espacios disponibles {{sede.cantidad}}/30 <i class='bx bxs-car'></i>
         </p>
         <div class="text-center">
           <a href="#" class="card-link text-purple">Ver en el mapa <i class='bx bxs-map'></i></a>
