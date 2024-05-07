@@ -117,6 +117,10 @@ export class LoginService {
     return this.obtenerDatosToken(sessionStorage.getItem('token')).sub;
   }
 
+  get id(): number{
+    return this.obtenerDatosToken(sessionStorage.getItem('token')).id;
+  }
+
   get role(): any {
     return this.obtenerDatosToken(sessionStorage.getItem('token')).role.replace(
       /\[|\]/g,

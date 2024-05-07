@@ -79,7 +79,7 @@ export class CarscardComponent implements OnInit {
               if (result.isConfirmed) {
                 console.log(this.registroRequest);
                 this.registroRequest.idEstacionamiento = 25;
-                this.registroRequest.idUsuarioSeguridad = 6;
+                this.registroRequest.idUsuarioSeguridad = this.loginService.id;
                 this.registroRequest.placa = this.registroForm.value.placa;
                 this.registrarIngreso();
               }
@@ -105,7 +105,6 @@ export class CarscardComponent implements OnInit {
       next: () => {
         Swal.fire('Vehiculo registrado', 'Gracias', 'success');
         this.cargarSedes();
-        
         this.registroForm.get('placa')?.setValue(null);
       },
     });
@@ -122,8 +121,17 @@ export class CarscardComponent implements OnInit {
             'success'
           );
           this.cargarSedes();
-          this.salidaForm.get('placa')?.setValue(null);
+        },
+        error: (err) => {
+          if ((err.status = 502)) {
+            Swal.fire(
+              'Vehiculo no encontrado',
+              'El vehiculo no fue registrado al ingresar',
+              'warning'
+            );
+          }
         },
       });
+    this.salidaForm.get('placa')?.setValue(null);
   }
 }
