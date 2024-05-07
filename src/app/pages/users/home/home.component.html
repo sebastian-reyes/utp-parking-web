@@ -2,7 +2,7 @@
 <section class="home-section">
   <app-navbar />
   <div class="container">
-    <app-carousel />
+    <app-carousel *ngIf="this.rol === 'ALUMNO'" />
     <div class="container p-3 mt-2">
       <h4 *ngIf="this.rol === 'SEGURIDAD'">
         Hoy, <span class="fw-bold">{{fechaFormateada}}</span>, estos son los espacios

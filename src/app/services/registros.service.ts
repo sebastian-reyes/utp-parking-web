@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable, catchError, throwError } from 'rxjs';
+import { RegistroRequest } from '../interface/registroRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,19 @@ export class RegistrosService {
   validarVehiculo(placa: string): Observable<any> {
     return this.http
       .get(`${environment.urlApi}/vehiculo/validar/${placa}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  registrarIngreso(registro: RegistroRequest): Observable<any> {
+    console.log(registro);
+    return this.http
+      .post<any>(`${environment.urlApi}/registros/ingreso`, registro)
+      .pipe(catchError(this.handleError));
+  }
+
+  registrarSalida(placa: any): Observable<any> {
+    return this.http
+      .patch(`${environment.urlApi}/registros/salida/${placa}`, null)
       .pipe(catchError(this.handleError));
   }
 

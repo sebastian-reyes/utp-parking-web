@@ -13,7 +13,11 @@
         />
       </div>
       <div class="col-auto">
-        <button type="button" (click)="validarVehiculo()" class="btn btn-primary mb-3">
+        <button
+          type="button"
+          (click)="validarVehiculo()"
+          class="btn btn-primary mb-3"
+        >
           Verificar Placa
         </button>
       </div>
@@ -21,21 +25,25 @@
   </div>
   <div class="col-md-6 mt-3">
     <h4 class="mt-4 fw-bold text-center">Salida de vehículos:</h4>
-    <form class="row mt-3 g-3">
-        <div class="col-auto">
-          <label for="inputPassword2" class="visually-hidden">Password</label>
-          <input
-            type="text"
-            class="form-control"
-            id="inputPassword2"
-            placeholder="Placa"
-          />
-        </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary mb-3">
-            Confirmar Salida
-          </button>
-        </div>
-      </form>
+    <form [formGroup]="salidaForm" class="row mt-3 g-3">
+      <div class="col-auto">
+        <label for="inputPassword2" class="visually-hidden">Password</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="placa"
+          placeholder="Placa"
+        />
+      </div>
+      <div class="col-auto">
+        <button
+          type="button"
+          (click)="registrarSalida()"
+          class="btn btn-primary mb-3"
+        >
+          Confirmar Salida
+        </button>
+      </div>
+    </form>
   </div>
 </div>
