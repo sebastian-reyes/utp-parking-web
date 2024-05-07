@@ -9,7 +9,10 @@ import { Router } from '@angular/router';
 })
 export class SliderComponent implements AfterViewInit, OnInit {
   userLoginOn: boolean = false;
-
+  public rol: any;
+  public nombre: string = '';
+  public apellido: string = '';
+  public codigo: string = '';
   constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
@@ -18,6 +21,10 @@ export class SliderComponent implements AfterViewInit, OnInit {
         this.userLoginOn = userLoginOn;
       },
     });
+    this.rol = this.loginService.role;
+    this.nombre = this.loginService.nombres.split(' ')[0];
+    this.apellido = this.loginService.apellidos.split(' ')[0];
+    this.codigo = this.loginService.codigo;
   }
 
   logout() {

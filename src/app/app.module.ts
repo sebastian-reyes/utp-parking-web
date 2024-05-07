@@ -15,7 +15,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
-import { FormRegistroComponent } from './pages/users/form-registro/form-registro.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { FormRegistroComponent } from './pages/users/form-registro/form-registro
     CarscardComponent,
     InfoaditionalComponent,
     FooterComponent,
-    FormRegistroComponent,
   ],
   imports: [
     BrowserModule,

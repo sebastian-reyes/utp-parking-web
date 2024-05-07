@@ -106,14 +106,21 @@ export class LoginService {
   }
 
   get nombres(): string {
-    return  this.obtenerDatosToken(sessionStorage.getItem("token")).nombres
+    return this.obtenerDatosToken(sessionStorage.getItem('token')).nombres;
   }
 
-  get apellidos(): string{
-    return  this.obtenerDatosToken(sessionStorage.getItem("token")).apellidos
+  get apellidos(): string {
+    return this.obtenerDatosToken(sessionStorage.getItem('token')).apellidos;
+  }
+
+  get codigo(): string {
+    return this.obtenerDatosToken(sessionStorage.getItem('token')).sub;
   }
 
   get role(): any {
-    return this.obtenerDatosToken(sessionStorage.getItem("token")).role.replace(/\[|\]/g, '');
+    return this.obtenerDatosToken(sessionStorage.getItem('token')).role.replace(
+      /\[|\]/g,
+      ''
+    );
   }
 }
