@@ -4,7 +4,18 @@
       <div class="card-body">
         <h5 class="card-title fw-bold">{{ sede.nombre }}</h5>
         <h6 class="card-subtitle mb-3 text-muted">{{ sede.direccion }}</h6>
-        <p class="text-center fw-bold">
+        <p
+          [ngClass]="{
+            'text-success':
+              cantidadANumero(sede.cantidad) > 20 &&
+              30 >= cantidadANumero(sede.cantidad),
+            'text-warning':
+              cantidadANumero(sede.cantidad) > 13 &&
+              20 > cantidadANumero(sede.cantidad),
+            'text-danger': 10 > cantidadANumero(sede.cantidad)
+          }"
+          class="text-center fw-bold"
+        >
           Espacios disponibles {{ sede.cantidad }}/30 <i class="bx bxs-car"></i>
         </p>
         <div class="text-center">
@@ -16,7 +27,7 @@
     </div>
   </div>
 </div>
-<div  *ngIf="this.rol === 'SEGURIDAD'" class="row mt-4 p-2">
+<div *ngIf="this.rol === 'SEGURIDAD'" class="row mt-4 p-2">
   <hr />
   <div class="col-md-6 mt-3">
     <h4 class="mt-4 fw-bold">Ingreso de vehículos:</h4>

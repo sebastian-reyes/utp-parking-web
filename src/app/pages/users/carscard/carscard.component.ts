@@ -18,6 +18,7 @@ export class CarscardComponent implements OnInit {
   userLoginOn: boolean = false;
   public rol: any;
   public activo: boolean = false;
+  public cantidad: number = 0;
   registroRequest: RegistroRequest = {
     idEstacionamiento: 0,
     idUsuarioSeguridad: 0,
@@ -45,6 +46,8 @@ export class CarscardComponent implements OnInit {
   cargarSedes(): void {
     this.sedeService.getSedes().subscribe((response) => {
       this.sedes = response;
+
+      console.log(response);
     });
   }
 
@@ -89,7 +92,7 @@ export class CarscardComponent implements OnInit {
         error: (err) => {
           if ((err.status = 502)) {
             Swal.fire(
-              'Placa sin permiso',
+              'Placa no válida',
               'Por favor ingrese una placa válida.',
               'warning'
             );
@@ -108,6 +111,10 @@ export class CarscardComponent implements OnInit {
         this.registroForm.get('placa')?.setValue(null);
       },
     });
+  }
+
+  cantidadANumero(cantidad: string): number {
+    return parseInt(cantidad);
   }
 
   registrarSalida(): void {
