@@ -9,7 +9,6 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { User } from '../interface/user';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
@@ -46,8 +45,17 @@ export class LoginService {
   }
 
   logout(): void {
-    sessionStorage.removeItem('token');
+    sessionStorage.clear();
     this.currentUserLoginOn.next(false);
+  }
+
+  estaAutenticado(): boolean {
+    let payload = sessionStorage.getItem('token');
+    if (payload != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -65,6 +73,26 @@ export class LoginService {
     );
   }
 
+  parseJwt(token: string) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(function (c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  }
+
+  obtenerDatosToken(access_token: any): any {
+    if (access_token != null) {
+      return this.parseJwt(access_token);
+    }
+  }
+
   get userData(): Observable<any> {
     return this.currentUserData.asObservable();
   }
@@ -73,7 +101,19 @@ export class LoginService {
     return this.currentUserLoginOn.asObservable();
   }
 
-  get userToken(): String{
+  get userToken(): String {
     return this.currentUserData.value;
+  }
+
+  get nombres(): string {
+    return  this.obtenerDatosToken(sessionStorage.getItem("token")).nombres
+  }
+
+  get apellidos(): string{
+    return  this.obtenerDatosToken(sessionStorage.getItem("token")).apellidos
+  }
+
+  get role(): any {
+    return this.obtenerDatosToken(sessionStorage.getItem("token")).role.replace(/\[|\]/g, '');
   }
 }

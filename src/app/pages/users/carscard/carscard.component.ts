@@ -12,7 +12,8 @@ import { SedesService } from '../../../services/sedes.service';
 export class CarscardComponent implements OnInit {
   public sedes: Sede[] = [];
   userLoginOn: boolean = false;
-  sede?: Sede;
+  public rol: any;
+
   constructor(
     private loginService: LoginService,
     private sedeService: SedesService
@@ -25,6 +26,7 @@ export class CarscardComponent implements OnInit {
       },
     });
     this.cargarSedes();
+    this.rol = this.loginService.role;
   }
 
   cargarSedes(): void {

@@ -4,18 +4,23 @@
   <div class="container">
     <app-carousel />
     <div class="container p-3 mt-2">
-      <h4>
-        Hoy, <span class="fw-bold">27 de abril</span>, estos son los espacios
+      <h4 *ngIf="this.rol === 'SEGURIDAD'">
+        Hoy, <span class="fw-bold">{{fechaFormateada}}</span>, estos son los espacios
+        disponibles que tenemos:
+      </h4>
+      <h4 *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
+        Hoy, <span class="fw-bold">{{fechaFormateada}}</span>, estos son los espacios
         disponibles que tenemos para ti:
       </h4>
       <app-carscard />
-      <p class="mt-3">
+      <p *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" class="mt-3">
         También puedes
         <a href="#" class="text-purple fw-bold"
           >solicitar el ingreso de tu vehículo aquí.</a
         >
       </p>
-      <app-infoaditional />
+      <app-form-registro *ngIf="this.rol === 'SEGURIDAD'"/>
+      <app-infoaditional *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" />
     </div>
   </div>
   <app-footer/>

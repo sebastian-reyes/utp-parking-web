@@ -1,0 +1,41 @@
+<div class="row mt-4 p-2">
+  <hr />
+  <div class="col-md-6 mt-3">
+    <h4 class="mt-4 fw-bold text-center">Ingreso de vehículos:</h4>
+    <form [formGroup]="registroForm" class="row mt-3 g-3">
+      <div class="col-auto">
+        <label for="inputPassword2" class="visually-hidden">Placa</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="placa"
+          placeholder="Placa"
+        />
+      </div>
+      <div class="col-auto">
+        <button type="button" (click)="validarVehiculo()" class="btn btn-primary mb-3">
+          Verificar Placa
+        </button>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-6 mt-3">
+    <h4 class="mt-4 fw-bold text-center">Salida de vehículos:</h4>
+    <form class="row mt-3 g-3">
+        <div class="col-auto">
+          <label for="inputPassword2" class="visually-hidden">Password</label>
+          <input
+            type="text"
+            class="form-control"
+            id="inputPassword2"
+            placeholder="Placa"
+          />
+        </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-3">
+            Confirmar Salida
+          </button>
+        </div>
+      </form>
+  </div>
+</div>
