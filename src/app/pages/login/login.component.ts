@@ -32,6 +32,11 @@ export class LoginComponent implements OnInit {
         },
         error: (errorData) => {
           console.error(errorData);
+          Swal.fire({
+            title: 'Usuario o contraseña <br/> incorrecto.',
+            icon: 'error',
+            confirmButtonText: 'Intentar otra vez',
+          });
         },
         complete: () => {
           console.info('Login completado');
