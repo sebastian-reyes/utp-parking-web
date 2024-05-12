@@ -1,16 +1,15 @@
-<app-slider />
+<app-slider/>
 <section class="home-section">
   <app-navbar />
   <div class="container">
-    <app-carousel *ngIf="this.rol === 'ALUMNO'" />
     <div class="container p-3 mt-2">
       <h4 *ngIf="this.rol === 'SEGURIDAD'">
-        Hoy, <span class="fw-bold">{{fechaFormateada}}</span>, estos son los espacios
-        disponibles que tenemos:
+        Hoy, <span class="fw-bold">{{ fechaFormateada }}</span
+        >, estos son los espacios disponibles que tenemos:
       </h4>
       <h4 *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
-        Hoy, <span class="fw-bold">{{fechaFormateada}}</span>, estos son los espacios
-        disponibles que tenemos para ti:
+        Hoy, <span class="fw-bold">{{ fechaFormateada }}</span
+        >, estos son los espacios disponibles que tenemos para ti:
       </h4>
       <app-carscard />
       <p *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" class="mt-3">
@@ -19,8 +18,10 @@
           >solicitar el ingreso de tu vehículo aquí.</a
         >
       </p>
-      <app-infoaditional *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" />
+      <app-infoaditional
+        *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'"
+      />
     </div>
   </div>
-  <app-footer/>
+  <app-footer *ngIf="this.rol === 'ALUMNO'" />
 </section>

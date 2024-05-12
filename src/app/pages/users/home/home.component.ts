@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   public fechaFormateada: string = '';
   public rol: any;
 
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
       );
       this.router.navigate(['/login']);
     }
-    
+
     this.rol = this.loginService.role;
     let fechaActual = new Date();
 
@@ -35,5 +35,54 @@ export class HomeComponent implements OnInit {
 
     // Formateamos la fecha y la convertimos en una cadena
     this.fechaFormateada = formatoFecha.format(fechaActual);
+  }
+
+  ngAfterViewInit(): void {
+    const sidebar: HTMLElement | null = document.querySelector('.sidebar');
+    const logo: HTMLElement | null = document.querySelector('.logo_details');
+    const navList: HTMLElement | null = document.querySelector('.nav-list');
+    const closeBtn: HTMLElement | null = document.querySelector('#btn');
+    const openBtn: HTMLElement | null = document.querySelector('#btn-open');
+    const logOut: HTMLElement | null = document.querySelector('#log_out');
+
+    openBtn?.addEventListener('click', function () {
+      if (
+        sidebar != null &&
+        logo != null &&
+        navList != null &&
+        logOut != null
+      ) {
+        sidebar.style.visibility = 'visible';
+        navList.style.visibility = 'visible';
+        logOut.style.visibility = 'visible';
+        logo.style.visibility = 'visible';
+      }
+      sidebar?.classList.remove('hidden');
+      sidebar?.classList.toggle('open');
+      console.log('boton apretado');
+    });
+
+    closeBtn?.addEventListener('click', function () {
+      if (
+        sidebar != null &&
+        logo != null &&
+        navList != null &&
+        logOut != null
+      ) {
+        sidebar.classList.replace('open', 'hidden');
+        logo.style.visibility = 'hidden';
+        logOut.style.visibility = 'hidden';
+        navList.style.visibility = 'hidden';
+        sidebar.style.visibility = 'hidden';
+      }
+    });
+
+    function menuBtnChange(): void {
+      if (sidebar?.classList.contains('open')) {
+        closeBtn?.classList.replace('bx-menu', 'bx-menu-alt-right');
+      } else {
+        closeBtn?.classList.replace('bx-menu-alt-right', 'bx-menu');
+      }
+    }
   }
 }

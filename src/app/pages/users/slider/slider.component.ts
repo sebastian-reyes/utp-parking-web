@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   templateUrl: './slider.component.html',
   styleUrl: './slider.component.css',
 })
-export class SliderComponent implements AfterViewInit, OnInit {
+export class SliderComponent implements OnInit {
   userLoginOn: boolean = false;
   public rol: any;
   public nombre: string = '';
@@ -30,29 +30,5 @@ export class SliderComponent implements AfterViewInit, OnInit {
   logout() {
     this.loginService.logout();
     this.router.navigate(['/login']);
-  }
-
-  ngAfterViewInit(): void {
-    const sidebar: HTMLElement | null = document.querySelector('.sidebar');
-    const closeBtn: HTMLElement | null = document.querySelector('#btn');
-    const searchBtn: HTMLElement | null = document.querySelector('.bx-search');
-
-    closeBtn?.addEventListener('click', function () {
-      sidebar?.classList.toggle('open');
-      menuBtnChange();
-    });
-
-    searchBtn?.addEventListener('click', function () {
-      sidebar?.classList.toggle('open');
-      menuBtnChange();
-    });
-
-    function menuBtnChange(): void {
-      if (sidebar?.classList.contains('open')) {
-        closeBtn?.classList.replace('bx-menu', 'bx-menu-alt-right');
-      } else {
-        closeBtn?.classList.replace('bx-menu-alt-right', 'bx-menu');
-      }
-    }
   }
 }
