@@ -22,10 +22,10 @@ export class LoginService {
 
   constructor(private http: HttpClient) {
     this.currentUserLoginOn = new BehaviorSubject<boolean>(
-      sessionStorage.getItem('token') != null
+      localStorage.getItem('token') != null
     );
     this.currentUserData = new BehaviorSubject<String>(
-      sessionStorage.getItem('token') || ''
+      localStorage.getItem('token') || ''
     );
   }
 
@@ -35,7 +35,7 @@ export class LoginService {
       .post<any>(`${environment.urlApi}/auth/login`, credentials)
       .pipe(
         tap((userData) => {
-          sessionStorage.setItem('token', userData.token);
+          localStorage.setItem('token', userData.token);
           this.currentUserData.next(userData.token);
           this.currentUserLoginOn.next(true);
         }),
@@ -45,12 +45,12 @@ export class LoginService {
   }
 
   logout(): void {
-    sessionStorage.clear();
+    localStorage.clear();
     this.currentUserLoginOn.next(false);
   }
 
   estaAutenticado(): boolean {
-    let payload = sessionStorage.getItem('token');
+    let payload = localStorage.getItem('token');
     if (payload != null) {
       return true;
     } else {
@@ -106,23 +106,23 @@ export class LoginService {
   }
 
   get nombres(): string {
-    return this.obtenerDatosToken(sessionStorage.getItem('token')).nombres;
+    return this.obtenerDatosToken(localStorage.getItem('token')).nombres;
   }
 
   get apellidos(): string {
-    return this.obtenerDatosToken(sessionStorage.getItem('token')).apellidos;
+    return this.obtenerDatosToken(localStorage.getItem('token')).apellidos;
   }
 
   get codigo(): string {
-    return this.obtenerDatosToken(sessionStorage.getItem('token')).sub;
+    return this.obtenerDatosToken(localStorage.getItem('token')).sub;
   }
 
   get id(): number{
-    return this.obtenerDatosToken(sessionStorage.getItem('token')).id;
+    return this.obtenerDatosToken(localStorage.getItem('token')).id;
   }
 
   get role(): any {
-    return this.obtenerDatosToken(sessionStorage.getItem('token')).role.replace(
+    return this.obtenerDatosToken(localStorage.getItem('token')).role.replace(
       /\[|\]/g,
       ''
     );

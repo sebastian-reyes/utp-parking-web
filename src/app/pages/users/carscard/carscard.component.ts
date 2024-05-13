@@ -45,12 +45,12 @@ export class CarscardComponent implements OnInit {
       },
     });
     this.cargarSedes();
-    this.idSede = sessionStorage.getItem('id_sede');
+    this.idSede = localStorage.getItem('id_sede');
     this.rol = this.loginService.role;
     let fechaActual = new Date();
 
-    if (sessionStorage.getItem('id_sede')) {
-      let id_sede = sessionStorage.getItem('id_sede');
+    if (localStorage.getItem('id_sede')) {
+      let id_sede = localStorage.getItem('id_sede');
       if (id_sede != null) {
         let idSede = parseInt(id_sede);
         this.sedeService.getSede(idSede).subscribe((response) => {
@@ -175,11 +175,11 @@ export class CarscardComponent implements OnInit {
       this.nombreSede = 'Campus Lima Centro - ' + response.nombre;
     });
     this.infoSede = 'Te encuentras en:';
-    if (sessionStorage.getItem('id_sede')) {
-      sessionStorage.removeItem('id_sede');
-      sessionStorage.setItem('id_sede', id_sede.toString());
+    if (localStorage.getItem('id_sede')) {
+      localStorage.removeItem('id_sede');
+      localStorage.setItem('id_sede', id_sede.toString());
     } else {
-      sessionStorage.setItem('id_sede', id_sede.toString());
+      localStorage.setItem('id_sede', id_sede.toString());
     }
     this.idSede = id_sede.toString();
     this.infoBoton = 'Cambiar Sede';
