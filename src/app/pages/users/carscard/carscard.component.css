@@ -1,3 +1,8 @@
 .text-purple {
-    color: #700d70;
-  }
+  color: #700d70;
+}
+
+.card-sede:hover {
+  cursor: pointer;
+  background-color: rgb(241, 241, 227);
+}

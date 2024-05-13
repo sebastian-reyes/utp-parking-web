@@ -1,4 +1,12 @@
 <div *ngIf="userLoginOn" class="row p-2">
+  <h4 class="mt-2" *ngIf="this.rol === 'SEGURIDAD'">
+    Hoy, <span class="fw-bold">{{ fechaFormateada }}</span
+    >, estos son los espacios disponibles que tenemos:
+  </h4>
+  <h4 class="mt-2" *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
+    Hoy, <span class="fw-bold">{{ fechaFormateada }}</span
+    >, estos son los espacios disponibles que tenemos para ti:
+  </h4>
   <div *ngFor="let sede of sedes" class="col-md-4 mt-3">
     <div class="card border-light shadow-sm rounded">
       <div class="card-body">
@@ -29,18 +37,86 @@
       </div>
     </div>
   </div>
+  <p *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" class="mt-4">
+    También puedes
+    <a href="#" class="text-purple fw-bold"
+      >solicitar el ingreso de tu vehículo aquí.</a
+    >
+  </p>
 </div>
 <hr />
 <div *ngIf="this.rol === 'SEGURIDAD'" class="mt-2 p-2 mb-5">
   <div class="row">
-    <div class="col-md-6">
-      <h5>Te encuentras en: <span class="fw-bold">Sede Arequipa</span></h5>
+    <div class="col-md-12">
+      <h5>
+        {{ infoSede }}
+        <span class="fw-bold me-3">{{ nombreSede }}</span>
+        <!-- Button trigger modal -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#staticBackdrop"
+        >
+          {{ infoBoton }}
+        </button>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title fw-bold" id="staticBackdropLabel">
+                  Cambio de sede
+                </h4>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <span class="text-muted"
+                  >Por favor elige en que sede estás operando:</span
+                >
+                <div class="container p-4">
+                  <div class="row">
+                    <div *ngFor="let sede of sedes" class="col-md-4">
+                      <div
+                        class="card card-sede mt-2 mb-2"
+                        data-bs-dismiss="modal"
+                        (click)="cambiarSede(sede.idSede)"
+                      >
+                        <div class="card-body">
+                          <h5 class="card-title fw-bold">{{ sede.nombre }}</h5>
+                          <h6 class="card-subtitle mb-2 text-muted">
+                            {{ sede.direccion }}
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </h5>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="idSede != null">
     <div class="col-md-6">
       <h4 class="mt-4 fw-bold">Ingreso de vehículos:</h4>
-      <form [formGroup]="registroForm" class="row mt-2 g-3">
+      <form [formGroup]="registroForm" class="row mt-2 mb-1 g-3">
         <div class="col-auto">
           <label for="placa-ingreso" class="visually-hidden">Placa</label>
           <input

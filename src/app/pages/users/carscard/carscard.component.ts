@@ -24,6 +24,11 @@ export class CarscardComponent implements OnInit {
     idUsuarioSeguridad: 0,
     placa: '',
   };
+  public idSede: any;
+  public infoSede: string = '';
+  public nombreSede: string = 'Ingrese en qué sede está laborando';
+  public infoBoton: string = 'Ingresar sede';
+  public fechaFormateada: string = '';
 
   constructor(
     private loginService: LoginService,
@@ -40,14 +45,23 @@ export class CarscardComponent implements OnInit {
       },
     });
     this.cargarSedes();
+    this.idSede = sessionStorage.getItem('id_sede');
     this.rol = this.loginService.role;
+    let fechaActual = new Date();
+
+    // Creamos un objeto Intl.DateTimeFormat para formatear la fecha
+    let formatoFecha = new Intl.DateTimeFormat('es-ES', {
+      month: 'long',
+      day: 'numeric',
+    });
+
+    // Formateamos la fecha y la convertimos en una cadena
+    this.fechaFormateada = formatoFecha.format(fechaActual);
   }
 
   cargarSedes(): void {
     this.sedeService.getSedes().subscribe((response) => {
       this.sedes = response;
-
-      console.log(response);
     });
   }
 
@@ -71,6 +85,7 @@ export class CarscardComponent implements OnInit {
               icon: 'error',
               confirmButtonText: 'Intentar otra vez',
             });
+            this.registroForm.get('placa')?.setValue(null);
           } else {
             Swal.fire({
               title: 'Vehiculo apto',
@@ -103,6 +118,7 @@ export class CarscardComponent implements OnInit {
         },
       });
   }
+
   registrarIngreso(): void {
     this.registroService.registrarIngreso(this.registroRequest).subscribe({
       next: () => {
@@ -140,5 +156,20 @@ export class CarscardComponent implements OnInit {
         },
       });
     this.salidaForm.get('placa')?.setValue(null);
+  }
+
+  cambiarSede(id_sede: number): void {
+    this.sedeService.getSede(id_sede).subscribe((response) => {
+      this.nombreSede = "Campus Lima Centro - "+response.nombre;
+    });
+    this.infoSede = 'Te encuentras en:';
+    if (sessionStorage.getItem('id_sede')) {
+      sessionStorage.removeItem('id_sede');
+      sessionStorage.setItem('id_sede', id_sede.toString());
+    } else {
+      sessionStorage.setItem('id_sede', id_sede.toString());
+    }
+    this.idSede = id_sede.toString();
+    this.infoBoton = 'Cambiar Sede'
   }
 }

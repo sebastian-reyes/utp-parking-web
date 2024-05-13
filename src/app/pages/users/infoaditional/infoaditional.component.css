@@ -2,6 +2,14 @@
   color: #300630;
 }
 
+a{
+  text-decoration: none;
+}
+
+.card-text{
+  color: #000;
+}
+
 .card:hover {
   background-color: rgba(158, 207, 250, 0.3);
   border-color: rgba(158, 207, 250, 0.3) !important;

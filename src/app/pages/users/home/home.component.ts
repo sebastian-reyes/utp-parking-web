@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  public fechaFormateada: string = '';
   public rol: any;
 
   constructor(private loginService: LoginService, private router: Router) {}
@@ -23,18 +22,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       );
       this.router.navigate(['/login']);
     }
-
     this.rol = this.loginService.role;
-    let fechaActual = new Date();
-
-    // Creamos un objeto Intl.DateTimeFormat para formatear la fecha
-    let formatoFecha = new Intl.DateTimeFormat('es-ES', {
-      month: 'long',
-      day: 'numeric',
-    });
-
-    // Formateamos la fecha y la convertimos en una cadena
-    this.fechaFormateada = formatoFecha.format(fechaActual);
   }
 
   ngAfterViewInit(): void {
@@ -76,13 +64,5 @@ export class HomeComponent implements OnInit, AfterViewInit {
         sidebar.style.visibility = 'hidden';
       }
     });
-
-    function menuBtnChange(): void {
-      if (sidebar?.classList.contains('open')) {
-        closeBtn?.classList.replace('bx-menu', 'bx-menu-alt-right');
-      } else {
-        closeBtn?.classList.replace('bx-menu-alt-right', 'bx-menu');
-      }
-    }
   }
 }

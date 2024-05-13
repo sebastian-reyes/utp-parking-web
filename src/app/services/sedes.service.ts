@@ -17,6 +17,13 @@ export class SedesService {
     );
   }
 
+  getSede(idSede: number): Observable<Sede> {
+    return this.http.get(`${environment.urlApi}/sedes/${idSede}`).pipe(
+      map((response: any) => response['sede'] as Sede),
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       console.error('Se ha producido un error: ', error.error);

@@ -7,3 +7,11 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.modal-backdrop {
+  position: relative !important;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.4);
+}
