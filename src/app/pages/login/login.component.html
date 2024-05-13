@@ -5,7 +5,7 @@
         class="section-img-login col-md-6 d-flex justify-content-center align-items-center"
       >
         <img
-          src="../../../assets/images/img_login.png"
+          src="../../../assets/images/img_login.webp"
           alt="Logo"
           class="img-fluid img-login"
         />
@@ -32,17 +32,20 @@
           <div class="mt-4">
             <div class="mb-3">
               <form [formGroup]="loginForm">
-                <label class="form-label"
+                <span
                   >Ingresa tus datos para
-                  <span class="fw-bold">iniciar sesión.</span></label
-                >
+                  <span class="fw-bold">iniciar sesión.</span>
+                </span>
                 <input
+                  id="username"
                   type="text"
-                  class="form-control mt-1 mb-3 border-dark"
+                  class="form-control mt-2 mb-3 border-dark"
                   formControlName="username"
+                  autocomplete="on"
                   placeholder="Código de alumno"
                 />
                 <input
+                  id="password"
                   type="password"
                   class="form-control border-dark mb-3"
                   formControlName="password"

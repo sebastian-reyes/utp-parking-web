@@ -1,13 +1,13 @@
-<app-slider/>
+<app-slider />
 <section class="home-section">
   <app-navbar />
   <div class="container">
     <div class="container p-3 mt-2">
-      <h4 *ngIf="this.rol === 'SEGURIDAD'">
+      <h4 class="mt-2" *ngIf="this.rol === 'SEGURIDAD'">
         Hoy, <span class="fw-bold">{{ fechaFormateada }}</span
         >, estos son los espacios disponibles que tenemos:
       </h4>
-      <h4 *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
+      <h4 class="mt-2" *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
         Hoy, <span class="fw-bold">{{ fechaFormateada }}</span
         >, estos son los espacios disponibles que tenemos para ti:
       </h4>
@@ -24,4 +24,11 @@
     </div>
   </div>
   <app-footer *ngIf="this.rol === 'ALUMNO'" />
+  <div class="footer-bottom text-center py-3 bg-black">
+    <div class="container">
+      <p class="mb-0 text-light">
+        Copyright &copy; 2024. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
 </section>

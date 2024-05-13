@@ -30,52 +30,61 @@
     </div>
   </div>
 </div>
-<div *ngIf="this.rol === 'SEGURIDAD'" class="row mt-4 p-2">
-  <hr />
-  <div class="col-md-6 mt-3">
-    <h4 class="mt-4 fw-bold">Ingreso de vehículos:</h4>
-    <form [formGroup]="registroForm" class="row mt-3 g-3">
-      <div class="col-auto">
-        <label for="inputPassword2" class="visually-hidden">Placa</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="placa"
-          placeholder="Ingrese la placa"
-        />
-      </div>
-      <div class="col-auto">
-        <button
-          type="submit"
-          (click)="validarVehiculo()"
-          class="btn btn-success mb-3"
-        >
-          Validar Placa
-        </button>
-      </div>
-    </form>
+<hr />
+<div *ngIf="this.rol === 'SEGURIDAD'" class="mt-2 p-2 mb-5">
+  <div class="row">
+    <div class="col-md-6">
+      <h5>Te encuentras en: <span class="fw-bold">Sede Arequipa</span></h5>
+    </div>
   </div>
-  <div class="col-md-6 mt-3">
-    <h4 class="mt-4 fw-bold">Salida de vehículos:</h4>
-    <form [formGroup]="salidaForm" class="row mt-3 g-3">
-      <div class="col-auto">
-        <label for="inputPassword2" class="visually-hidden">Password</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="placa"
-          placeholder="Ingrese la placa"
-        />
-      </div>
-      <div class="col-auto">
-        <button
-          type="submit"
-          (click)="registrarSalida()"
-          class="btn btn-danger mb-3"
-        >
-          Confirmar Salida
-        </button>
-      </div>
-    </form>
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="mt-4 fw-bold">Ingreso de vehículos:</h4>
+      <form [formGroup]="registroForm" class="row mt-2 g-3">
+        <div class="col-auto">
+          <label for="placa-ingreso" class="visually-hidden">Placa</label>
+          <input
+            id="placa-ingreso"
+            type="text"
+            class="form-control"
+            formControlName="placa"
+            placeholder="Ingrese la placa"
+          />
+        </div>
+        <div class="col-auto">
+          <button
+            type="submit"
+            (click)="validarVehiculo()"
+            class="btn btn-success"
+          >
+            Validar Placa
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <h4 class="mt-4 fw-bold">Salida de vehículos:</h4>
+      <form [formGroup]="salidaForm" class="row mt-2 g-3">
+        <div class="col-auto">
+          <label for="placa-salida" class="visually-hidden">Password</label>
+          <input
+            id="placa-salida"
+            type="text"
+            class="form-control"
+            formControlName="placa"
+            placeholder="Ingrese la placa"
+          />
+        </div>
+        <div class="col-auto">
+          <button
+            type="submit"
+            (click)="registrarSalida()"
+            class="btn btn-danger"
+          >
+            Confirmar Salida
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
