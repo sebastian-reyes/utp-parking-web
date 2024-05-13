@@ -49,6 +49,18 @@ export class CarscardComponent implements OnInit {
     this.rol = this.loginService.role;
     let fechaActual = new Date();
 
+    if (sessionStorage.getItem('id_sede')) {
+      let id_sede = sessionStorage.getItem('id_sede');
+      if (id_sede != null) {
+        let idSede = parseInt(id_sede);
+        this.sedeService.getSede(idSede).subscribe((response) => {
+          this.infoSede = 'Te encuentras en:';
+          this.nombreSede = 'Campus Lima Centro - ' + response.nombre;
+          this.infoBoton = 'Cambiar sede';
+        });
+      }
+    }
+
     // Creamos un objeto Intl.DateTimeFormat para formatear la fecha
     let formatoFecha = new Intl.DateTimeFormat('es-ES', {
       month: 'long',
@@ -160,7 +172,7 @@ export class CarscardComponent implements OnInit {
 
   cambiarSede(id_sede: number): void {
     this.sedeService.getSede(id_sede).subscribe((response) => {
-      this.nombreSede = "Campus Lima Centro - "+response.nombre;
+      this.nombreSede = 'Campus Lima Centro - ' + response.nombre;
     });
     this.infoSede = 'Te encuentras en:';
     if (sessionStorage.getItem('id_sede')) {
@@ -170,6 +182,6 @@ export class CarscardComponent implements OnInit {
       sessionStorage.setItem('id_sede', id_sede.toString());
     }
     this.idSede = id_sede.toString();
-    this.infoBoton = 'Cambiar Sede'
+    this.infoBoton = 'Cambiar Sede';
   }
 }

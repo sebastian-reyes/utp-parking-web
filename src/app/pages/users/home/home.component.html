@@ -10,11 +10,14 @@
     </div>
   </div>
   <app-footer *ngIf="this.rol === 'ALUMNO'" />
-  <div class="footer-bottom fixed-bottom text-center py-3 bg-black">
+  <!--div
+    *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'"
+    class="footer-bottom text-center py-3 bg-black"
+  >
     <div class="container">
       <p class="mb-0 text-light">
         Copyright &copy; 2024. Todos los derechos reservados.
       </p>
     </div>
-  </div>
+  </div-->
 </section>

@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  selector: 'app-registro',
+  templateUrl: './registro.component.html',
+  styleUrl: './registro.component.css',
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class RegistroComponent implements OnInit, AfterViewInit {
   public rol: any;
 
   constructor(private loginService: LoginService, private router: Router) {}
@@ -22,6 +22,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       );
       this.router.navigate(['/login']);
     }
+
+    if (
+      this.loginService.role != 'ALUMNO' &&
+      this.loginService.role != 'DOCENTE'
+    ) {
+      Swal.fire(
+        'Recurso prohibido',
+        'Usted no puede ingresar a este recurso.',
+        'info'
+      );
+      this.router.navigate(['/']);
+    }
+
     this.rol = this.loginService.role;
   }
 

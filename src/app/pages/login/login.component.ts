@@ -17,7 +17,12 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.loginService.estaAutenticado()) {
+      Swal.fire('Sesión activa', 'Usted se encuentra autenticado.', 'success');
+      this.router.navigate(['/']);
+    }
+  }
 
   loginForm = this.formBuilder.group({
     username: ['', [Validators.required]],
@@ -27,11 +32,8 @@ export class LoginComponent implements OnInit {
   login() {
     if (this.loginForm.valid) {
       this.loginService.login(this.loginForm.value as LoginRequest).subscribe({
-        next: (userData) => {
-          console.log(userData);
-        },
+        next: (userData) => {},
         error: (errorData) => {
-          console.error(errorData);
           Swal.fire({
             title: 'Usuario o contraseña <br/> incorrecto.',
             icon: 'error',
@@ -39,7 +41,6 @@ export class LoginComponent implements OnInit {
           });
         },
         complete: () => {
-          console.info('Login completado');
           this.router.navigate(['/']);
         },
       });

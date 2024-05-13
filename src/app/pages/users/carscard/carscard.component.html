@@ -26,20 +26,12 @@
         >
           Espacios disponibles {{ sede.cantidad }}/30 <i class="bx bxs-car"></i>
         </p>
-        <div class="text-center">
-          <a
-            *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'"
-            href="#"
-            class="card-link text-purple"
-            >Ver en el mapa <i class="bx bxs-map"></i
-          ></a>
-        </div>
       </div>
     </div>
   </div>
   <p *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" class="mt-4">
     También puedes
-    <a href="#" class="text-purple fw-bold"
+    <a [routerLink]="['/registro']" class="text-purple fw-bold"
       >solicitar el ingreso de tu vehículo aquí.</a
     >
   </p>
