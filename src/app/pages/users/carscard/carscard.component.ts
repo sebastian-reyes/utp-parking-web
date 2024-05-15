@@ -108,7 +108,13 @@ export class CarscardComponent implements OnInit {
             }).then((result) => {
               if (result.isConfirmed) {
                 console.log(this.registroRequest);
-                this.registroRequest.idEstacionamiento = 25;
+                if (this.idSede == '1') {
+                  this.registroRequest.idEstacionamiento = 25;
+                } else if (this.idSede == '2') {
+                  this.registroRequest.idEstacionamiento = 35;
+                } else {
+                  this.registroRequest.idEstacionamiento = 86;
+                }
                 this.registroRequest.idUsuarioSeguridad = this.loginService.id;
                 this.registroRequest.placa = this.registroForm.value.placa;
                 this.registrarIngreso();
