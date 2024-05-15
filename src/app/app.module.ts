@@ -16,6 +16,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
 import { RegistroComponent } from './pages/users/registro/registro.component';
+import { SolicitudesComponent } from './pages/users/solicitudes/solicitudes.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RegistroComponent } from './pages/users/registro/registro.component';
     InfoaditionalComponent,
     FooterComponent,
     RegistroComponent,
+    SolicitudesComponent,
   ],
   imports: [
     BrowserModule,

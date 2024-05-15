@@ -1,0 +1,93 @@
+<div>
+  <app-slider />
+  <section class="home-section">
+    <app-navbar />
+    <div class="container">
+      <div class="container p-4 mt-2">
+        <h2 class="fw-bold text-center">Mis solicitudes</h2>
+        <div class="container mt-4">
+          <div class="row justify-content-center">
+            <div class="col-md-12 p-3">
+              <div class="card p-2 border-light">
+                <div class="card-body">
+                  <div class="container table-responsive">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <p class="text-secondary mt-2 mb-0">
+                          Puedes ver todos las solicitudes que realizaste aquí.
+                        </p>
+                        <a class="text-purple fw-bold" [routerLink]="['/registro']"
+                          >Registra una nueva solicitud aquí</a
+                        >
+                      </div>
+                      <div class="col-md-4">
+                        <select
+                          class="form-select mt-2"
+                          aria-label="Default select example"
+                        >
+                          <option selected value="1">
+                            2024 - Ciclo 1 Marzo
+                          </option>
+                          <option value="2">Verano 2024</option>
+                          <option value="3">2023 - Ciclo 1 Agosto</option>
+                        </select>
+                      </div>
+                    </div>
+                    <table class="table table-striped mt-5">
+                      <thead class="table-dark">
+                        <tr>
+                          <th scope="col" class="fw-bold">#</th>
+                          <th scope="col" class="fw-bold">
+                            Fecha de solicitud
+                          </th>
+                          <th scope="col" class="fw-bold">Placa</th>
+                          <th scope="col" class="fw-bold">Tipo de Vehículo</th>
+                          <th scope="col" class="fw-bold">
+                            Estado del trámite
+                          </th>
+                          <th scope="col" class="fw-bold">Comentario de SAE</th>
+                          <th scope="col" class="fw-bold">
+                            Fecha de solicitud finalizada
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row" class="fw-bold">1</th>
+                          <td>14/05/2024</td>
+                          <td>BCD-405</td>
+                          <td>Camioneta</td>
+                          <td>Por verificar</td>
+                          <td>Comentario</td>
+                          <td>-</td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="fw-bold">2</th>
+                          <td>14/02/2023</td>
+                          <td>HD2-4D1</td>
+                          <td>Trimoto</td>
+                          <td>Autorizado</td>
+                          <td>Comentario</td>
+                          <td>16/02/2023</td>
+                        </tr>
+                        <tr>
+                          <th scope="row" class="fw-bold">3</th>
+                          <td>05/01/2023</td>
+                          <td>ALN-FG3</td>
+                          <td>Auto</td>
+                          <td>Denegado</td>
+                          <td>Comentario</td>
+                          <td>06/01/2023</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

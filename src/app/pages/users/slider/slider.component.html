@@ -24,7 +24,7 @@
       </a>
     </li>
     <li *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
-      <a href="#">
+      <a [routerLink]="['/solicitudes']">
         <i class="bx bx-check-square"></i>
         <span class="link_name">Mis solicitudes</span>
       </a>
