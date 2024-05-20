@@ -2,6 +2,14 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { VehiculoService } from '../../../services/vehiculo.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { VehiculoRequest } from '../../../interface/vehiculoRequest';
 
 @Component({
   selector: 'app-registro',
@@ -11,7 +19,36 @@ import Swal from 'sweetalert2';
 export class RegistroComponent implements OnInit, AfterViewInit {
   public rol: any;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  vehiculoRequest: VehiculoRequest = {
+    categoria: '',
+    placa: '',
+    id_usuario: 0,
+  };
+
+  categorias = [
+    { categoria: 'Auto' },
+    { categoria: 'Camioneta' },
+    { categoria: 'Motocicleta' },
+    { categoria: 'Trimoto' },
+    { categoria: 'Moto eléctrica' },
+  ];
+
+  categoriaForm = new FormGroup({
+    categoria: new FormControl(this.categorias[0]),
+  });
+
+  solicitudForm = this.formBuilder.group({
+    categoria: [this.categorias[0], [Validators.required]],
+    placa: ['', [Validators.required]],
+    id_usuario: ['', [Validators.required]],
+  });
+
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private vehiculoService: VehiculoService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     if (!this.loginService.estaAutenticado()) {
@@ -76,5 +113,22 @@ export class RegistroComponent implements OnInit, AfterViewInit {
         sidebar.style.visibility = 'hidden';
       }
     });
+  }
+
+  //Servicios
+  registrar(): void {
+    const categoriaSeleccionada = this.solicitudForm.value.categoria;
+    if (categoriaSeleccionada != null) {
+      const nombreCategoriaSeleccionada: any = categoriaSeleccionada.categoria;
+      this.vehiculoRequest.categoria = nombreCategoriaSeleccionada;
+      this.vehiculoRequest.placa = this.solicitudForm.value.placa;
+      this.vehiculoRequest.id_usuario = this.loginService.id;
+      console.log(this.vehiculoRequest);
+      this.vehiculoService.registrarVehiculo(this.vehiculoRequest).subscribe({
+        next: () => {
+          Swal.fire('Solicitud registrada', 'Gracias', 'success');
+        },
+      });
+    }
   }
 }

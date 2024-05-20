@@ -14,7 +14,7 @@
                     Ingrese los datos necesarios para el registro de su
                     vehículo.
                   </span>
-                  <form class="mt-3">
+                  <form [formGroup]="solicitudForm" class="mt-3">
                     <label class="form-label"> Campus: </label>
                     <select
                       class="form-select border-dark"
@@ -25,21 +25,22 @@
                     <label class="form-label mt-2"> Vehículo: </label>
                     <select
                       class="form-select border-dark"
-                      aria-label="Disabled select example"
+                      formControlName="categoria"
                     >
-                      <option selected>Auto</option>
-                      <option value="1">Camioneta</option>
-                      <option value="2">Motocicleta</option>
-                      <option value="3">Trimoto</option>
-                      <option value="4">Moto eléctrica</option>
+                      <option *ngFor="let c of categorias" [ngValue]="c">
+                        {{ c.categoria }}
+                      </option>
                     </select>
                     <label class="form-label mt-2"> Placa: </label>
-                    <input type="text" class="form-control border-dark" />
+                    <input
+                      type="text"
+                      formControlName="placa"
+                      class="form-control border-dark"
+                    />
                     <div class="form-check mt-3">
                       <input
                         class="form-check-input"
                         type="checkbox"
-                        value=""
                         id="flexCheckDefault"
                       />
                       <label class="form-check-label" for="flexCheckDefault">
@@ -49,6 +50,7 @@
                     <button
                       type="button"
                       class="btn btn-login fw-bold p-2 mt-4"
+                      (click)="registrar()"
                     >
                       Registrar
                     </button>
@@ -60,12 +62,5 @@
         </div>
       </div>
     </div>
-    <!--div class="footer-bottom fixed-bottom text-center py-3 bg-black">
-      <div class="container">
-        <p class="mb-0 text-light">
-          Copyright &copy; 2024. Todos los derechos reservados.
-        </p>
-      </div>
-    </div-->
   </section>
 </div>
