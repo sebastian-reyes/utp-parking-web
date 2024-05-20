@@ -12,7 +12,7 @@ export class RegistrosService {
 
   validarVehiculo(placa: string): Observable<any> {
     return this.http
-      .get(`${environment.urlApi}/vehiculo/validar/${placa}`)
+      .get(`${environment.urlApi}/vehiculos/validar/${placa}`)
       .pipe(catchError(this.handleError));
   }
 

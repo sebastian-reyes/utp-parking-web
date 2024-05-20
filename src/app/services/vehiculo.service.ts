@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, map, throwError } from 'rxjs';
 import { VehiculoRequest } from '../interface/vehiculoRequest';
 import { environment } from '../../environments/environment.development';
+import { Vehiculo } from '../interface/vehiculo';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,15 @@ export class VehiculoService {
 
   registrarVehiculo(vehiculo: VehiculoRequest): Observable<any> {
     return this.http
-      .post(`${environment.urlApi}/vehiculo/registro`, vehiculo)
+      .post(`${environment.urlApi}/vehiculos/registro`, vehiculo)
       .pipe(catchError(this.handleError));
+  }
+
+  obtenerVehiculo(placa: string): Observable<any> {
+    return this.http.get(`${environment.urlApi}/vehiculos/${placa}`).pipe(
+      map((response: any) => response['vehiculo'] as Vehiculo),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

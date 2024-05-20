@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { VehiculoRequest } from '../../../interface/vehiculoRequest';
+import { Vehiculo } from '../../../interface/vehiculo';
 
 @Component({
   selector: 'app-registro',
@@ -18,7 +19,24 @@ import { VehiculoRequest } from '../../../interface/vehiculoRequest';
 })
 export class RegistroComponent implements OnInit, AfterViewInit {
   public rol: any;
-
+  public vehiculo: Vehiculo = {
+    id_vehiculo: 0,
+    placa: 'asd',
+    activo: false,
+    aprovado: false,
+    categoria: 'Auto',
+    usuario: {
+      id_usuario: 0,
+      nombres: '',
+      apellidos: '',
+      carrera: '',
+      correoInstitucional: '',
+      dni: '',
+      matriculado: false,
+      role: '',
+      username: '',
+    },
+  };
   vehiculoRequest: VehiculoRequest = {
     categoria: '',
     placa: '',
@@ -41,6 +59,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     categoria: [this.categorias[0], [Validators.required]],
     placa: ['', [Validators.required]],
     id_usuario: ['', [Validators.required]],
+    acepted: [false, [Validators.required]],
   });
 
   constructor(
@@ -117,18 +136,31 @@ export class RegistroComponent implements OnInit, AfterViewInit {
 
   //Servicios
   registrar(): void {
-    const categoriaSeleccionada = this.solicitudForm.value.categoria;
-    if (categoriaSeleccionada != null) {
-      const nombreCategoriaSeleccionada: any = categoriaSeleccionada.categoria;
-      this.vehiculoRequest.categoria = nombreCategoriaSeleccionada;
-      this.vehiculoRequest.placa = this.solicitudForm.value.placa;
+    let placa = this.solicitudForm.value.placa?.replace(/\s/g, '');
+    if (this.solicitudForm.value.acepted == true && placa != '') {
+      this.vehiculoRequest.categoria =
+        this.solicitudForm.value.categoria?.categoria;
+      this.vehiculoRequest.placa = placa;
       this.vehiculoRequest.id_usuario = this.loginService.id;
+      this.buscarVehiculo('ABC-123');
+      console.log(this.vehiculo);
       console.log(this.vehiculoRequest);
+
+      /*
       this.vehiculoService.registrarVehiculo(this.vehiculoRequest).subscribe({
         next: () => {
           Swal.fire('Solicitud registrada', 'Gracias', 'success');
         },
       });
+      */
+    } else {
+      Swal.fire('Error', 'Llenar campos obligatorios', 'error');
     }
+  }
+
+  buscarVehiculo(placa: string): void {
+    this.vehiculoService.obtenerVehiculo(placa).subscribe((response) => {
+      this.vehiculo = response.vehiculo;
+    });
   }
 }
