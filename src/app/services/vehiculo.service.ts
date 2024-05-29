@@ -17,11 +17,10 @@ export class VehiculoService {
       .pipe(catchError(this.handleError));
   }
 
-  obtenerVehiculo(placa: string): Observable<any> {
-    return this.http.get(`${environment.urlApi}/vehiculos/${placa}`).pipe(
-      map((response: any) => response['vehiculo'] as Vehiculo),
-      catchError(this.handleError)
-    );
+  obtenerVehiculo(placa: any): Observable<any> {
+    return this.http
+      .get(`${environment.urlApi}/vehiculos/${placa}`)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

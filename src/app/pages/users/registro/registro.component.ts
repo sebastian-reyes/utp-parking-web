@@ -10,8 +10,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { VehiculoRequest } from '../../../interface/vehiculoRequest';
-import { Vehiculo } from '../../../interface/vehiculo';
-
+import { SolicitudRequest } from '../../../interface/solicitudRequest';
+import { SolicitudService } from '../../../services/solicitud.service';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.component.html',
@@ -19,30 +19,16 @@ import { Vehiculo } from '../../../interface/vehiculo';
 })
 export class RegistroComponent implements OnInit, AfterViewInit {
   public rol: any;
-  public vehiculo: Vehiculo = {
-    id_vehiculo: 0,
-    placa: 'asd',
-    activo: false,
-    aprovado: false,
-    categoria: 'Auto',
-    usuario: {
-      id_usuario: 0,
-      nombres: '',
-      apellidos: '',
-      carrera: '',
-      correoInstitucional: '',
-      dni: '',
-      matriculado: false,
-      role: '',
-      username: '',
-    },
-  };
+  id: string = '';
   vehiculoRequest: VehiculoRequest = {
     categoria: '',
     placa: '',
     id_usuario: 0,
   };
-
+  solicitudRequest: SolicitudRequest = {
+    id_usuario: 0,
+    id_vehiculo: 0,
+  };
   categorias = [
     { categoria: 'Auto' },
     { categoria: 'Camioneta' },
@@ -50,11 +36,9 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     { categoria: 'Trimoto' },
     { categoria: 'Moto eléctrica' },
   ];
-
   categoriaForm = new FormGroup({
     categoria: new FormControl(this.categorias[0]),
   });
-
   solicitudForm = this.formBuilder.group({
     categoria: [this.categorias[0], [Validators.required]],
     placa: ['', [Validators.required]],
@@ -66,6 +50,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     private loginService: LoginService,
     private router: Router,
     private vehiculoService: VehiculoService,
+    private solicitudService: SolicitudService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -90,7 +75,6 @@ export class RegistroComponent implements OnInit, AfterViewInit {
       );
       this.router.navigate(['/']);
     }
-
     this.rol = this.loginService.role;
   }
 
@@ -134,7 +118,6 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     });
   }
 
-  //Servicios
   registrar(): void {
     let placa = this.solicitudForm.value.placa?.replace(/\s/g, '');
     if (this.solicitudForm.value.acepted == true && placa != '') {
@@ -142,25 +125,25 @@ export class RegistroComponent implements OnInit, AfterViewInit {
         this.solicitudForm.value.categoria?.categoria;
       this.vehiculoRequest.placa = placa;
       this.vehiculoRequest.id_usuario = this.loginService.id;
-      this.buscarVehiculo('ABC-123');
-      console.log(this.vehiculo);
-      console.log(this.vehiculoRequest);
-
-      /*
       this.vehiculoService.registrarVehiculo(this.vehiculoRequest).subscribe({
         next: () => {
-          Swal.fire('Solicitud registrada', 'Gracias', 'success');
+          this.vehiculoService.obtenerVehiculo(placa).subscribe((data) => {
+            this.id = data.vehiculo.id_vehiculo;
+            this.solicitudRequest.id_usuario = this.loginService.id;
+            this.solicitudRequest.id_vehiculo = data.vehiculo.id_vehiculo;
+            this.solicitudService
+              .registrarSolicitud(this.solicitudRequest)
+              .subscribe({
+                next: () => {
+                  Swal.fire('Solicitud registrada', 'Gracias', 'success');
+                  console.log(this.solicitudRequest);
+                },
+              });
+          });
         },
       });
-      */
     } else {
       Swal.fire('Error', 'Llenar campos obligatorios', 'error');
     }
-  }
-
-  buscarVehiculo(placa: string): void {
-    this.vehiculoService.obtenerVehiculo(placa).subscribe((response) => {
-      this.vehiculo = response.vehiculo;
-    });
   }
 }
