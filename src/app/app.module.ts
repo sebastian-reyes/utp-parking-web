@@ -16,6 +16,7 @@ import { JwtInterceptorService } from './services/auth/jwt-interceptor.service';
 import { ErrorInterceptorService } from './services/auth/error-interceptor.service';
 import { RegistroComponent } from './pages/users/registro/registro.component';
 import { SolicitudesComponent } from './pages/users/solicitudes/solicitudes.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { SolicitudesComponent } from './pages/users/solicitudes/solicitudes.comp
       useClass: ErrorInterceptorService,
       multi: true,
     },
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })

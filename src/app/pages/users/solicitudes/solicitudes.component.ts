@@ -2,6 +2,10 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { SolicitudService } from '../../../services/solicitud.service';
+import { Solicitud } from '../../../interface/solicitud';
+import { DatePipe } from '@angular/common';
+import { VehiculoService } from '../../../services/vehiculo.service';
 
 @Component({
   selector: 'app-solicitudes',
@@ -10,8 +14,14 @@ import Swal from 'sweetalert2';
 })
 export class SolicitudesComponent implements OnInit, AfterViewInit {
   public rol: any;
+  public solicitudes: Solicitud[] = [];
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(
+    private loginService: LoginService,
+    private router: Router,
+    private solicitudService: SolicitudService,
+    private vehiculoService: VehiculoService,
+    private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     if (!this.loginService.estaAutenticado()) {
@@ -34,8 +44,28 @@ export class SolicitudesComponent implements OnInit, AfterViewInit {
       );
       this.router.navigate(['/']);
     }
-
     this.rol = this.loginService.role;
+    this.cargarSolicitudes();
+  }
+
+  cargarSolicitudes(): void {
+    this.solicitudService.listarSolicitudes(this.loginService.id).subscribe((response) => {
+      this.solicitudes = response.map((solicitud: {
+        fechaSolicitud: string | number | Date | null;
+        fechaRespuesta: string | number | Date | null;
+        idVehiculo: number;
+        placa: string;
+        categoria: string
+      }) => {
+        solicitud.fechaSolicitud = this.datePipe.transform(solicitud.fechaSolicitud, 'dd/MM/yyyy');
+        solicitud.fechaRespuesta = this.datePipe.transform(solicitud.fechaRespuesta, 'dd/MM/yyyy')
+        this.vehiculoService.obtenerVehiculoId(solicitud.idVehiculo).subscribe((vehiculo) => {
+          solicitud.placa = vehiculo.vehiculo.placa;
+          solicitud.categoria = vehiculo.vehiculo.categoria;
+        })
+        return solicitud;
+      });
+    });
   }
 
   ngAfterViewInit(): void {

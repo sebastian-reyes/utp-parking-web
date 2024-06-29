@@ -16,15 +16,11 @@
                         <p class="text-secondary mt-2 mb-0">
                           Puedes ver todos las solicitudes que realizaste aquí.
                         </p>
-                        <a class="text-purple fw-bold" [routerLink]="['/registro']"
-                          >Registra una nueva solicitud aquí</a
-                        >
+                        <a class="text-purple fw-bold" [routerLink]="['/registro']">Registra una nueva solicitud
+                          aquí</a>
                       </div>
                       <div class="col-md-4">
-                        <select
-                          class="form-select mt-2"
-                          aria-label="Default select example"
-                        >
+                        <select class="form-select mt-2" aria-label="Default select example">
                           <option selected value="1">
                             2024 - Ciclo 1 Marzo
                           </option>
@@ -52,32 +48,15 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <th scope="row" class="fw-bold">1</th>
-                          <td>14/05/2024</td>
-                          <td>BCD-405</td>
-                          <td>Camioneta</td>
-                          <td>Por verificar</td>
-                          <td>Comentario</td>
-                          <td>-</td>
-                        </tr>
-                        <tr>
-                          <th scope="row" class="fw-bold">2</th>
-                          <td>14/02/2023</td>
-                          <td>HD2-4D1</td>
-                          <td>Trimoto</td>
-                          <td>Autorizado</td>
-                          <td>Comentario</td>
-                          <td>16/02/2023</td>
-                        </tr>
-                        <tr>
-                          <th scope="row" class="fw-bold">3</th>
-                          <td>05/01/2023</td>
-                          <td>ALN-FG3</td>
-                          <td>Auto</td>
-                          <td>Denegado</td>
-                          <td>Comentario</td>
-                          <td>06/01/2023</td>
+                        <tr *ngFor="let solicitud of solicitudes">
+                          <th scope="row" class="fw-bold">{{solicitud.idSolicitud}}</th>
+                          <td>{{solicitud.fechaSolicitud}}</td>
+                          <td>{{solicitud.placa}}</td>
+                          <td>{{solicitud.categoria}}</td>
+                          <td>{{solicitud.estado}}</td>
+                          <td class="comentario">Comentario</td>
+                          <td *ngIf="solicitud.fechaRespuesta != null">{{solicitud.fechaRespuesta}}</td>
+                          <td *ngIf="solicitud.fechaRespuesta == null">-</td>
                         </tr>
                       </tbody>
                     </table>

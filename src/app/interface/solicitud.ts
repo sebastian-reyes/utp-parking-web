@@ -1,8 +1,10 @@
 export interface Solicitud {
   idSolicitud: number;
   fechaSolicitud: Date;
-  fechaRespuesta: any;
+  fechaRespuesta: Date;
   estado: string;
   idUsuario: number;
   idVehiculo: number;
+  placa: string;
+  categoria: string;
 }

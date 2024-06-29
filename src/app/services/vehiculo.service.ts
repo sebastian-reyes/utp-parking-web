@@ -9,7 +9,7 @@ import { Vehiculo } from '../interface/vehiculo';
   providedIn: 'root',
 })
 export class VehiculoService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   registrarVehiculo(vehiculo: VehiculoRequest): Observable<any> {
     return this.http
@@ -19,7 +19,13 @@ export class VehiculoService {
 
   obtenerVehiculo(placa: any): Observable<any> {
     return this.http
-      .get(`${environment.urlApi}/vehiculos/${placa}`)
+      .get(`${environment.urlApi}/vehiculos/placa/${placa}`)
+      .pipe(catchError(this.handleError));
+  }
+
+  obtenerVehiculoId(id: any): Observable<any> {
+    return this.http
+      .get(`${environment.urlApi}/vehiculos/id/${id}`)
       .pipe(catchError(this.handleError));
   }
 
