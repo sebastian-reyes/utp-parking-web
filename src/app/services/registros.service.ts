@@ -3,12 +3,13 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { Observable, catchError, throwError } from 'rxjs';
 import { RegistroRequest } from '../interface/registroRequest';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegistrosService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   validarVehiculo(placa: string): Observable<any> {
     return this.http

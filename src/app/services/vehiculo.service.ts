@@ -4,6 +4,7 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 import { VehiculoRequest } from '../interface/vehiculoRequest';
 import { environment } from '../../environments/environment.development';
 import { Vehiculo } from '../interface/vehiculo';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,12 @@ export class VehiculoService {
     if (error.status === 0) {
       console.error('Se ha producido un error: ', error.error);
     } else {
+      Swal.fire({
+        title: 'Placa duplicada',
+        text: 'Esta placa ya se encuentra registrada.',
+        icon: 'error',
+        confirmButtonText: 'Intentar otra vez',
+      });
       console.error(
         'Backend retornó el código de estado: ',
         error.status,

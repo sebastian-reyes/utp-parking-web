@@ -136,6 +136,7 @@ export class RegistroComponent implements OnInit, AfterViewInit {
               .subscribe({
                 next: () => {
                   Swal.fire('Solicitud registrada', 'Gracias', 'success');
+                  this.router.navigate(['/solicitudes'])
                   console.log(this.solicitudRequest);
                 },
               });

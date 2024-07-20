@@ -4,13 +4,15 @@
     <app-navbar />
     <div class="container">
       <div class="container p-4 mt-2">
-        <h2 class="fw-bold text-center">Mis solicitudes</h2>
+        <h2 *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" class="fw-bold text-center">Mis solicitudes</h2>
+        <h2 *ngIf="this.rol === 'PERSONAL_SAE'" class="fw-bold text-center">Solicitudes de Ingreso</h2>
         <div class="container mt-4">
           <div class="row justify-content-center">
             <div class="col-md-12 p-3">
               <div class="card p-2 border-light">
                 <div class="card-body">
-                  <div class="container table-responsive">
+                  <!--Tabla para usuarios tipo DOCENTE Y ALUMNO-->
+                  <div *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'" class="container table-responsive">
                     <div class="row">
                       <div class="col-md-8">
                         <p class="text-secondary mt-2 mb-0">
@@ -42,6 +44,79 @@
                             Estado del trámite
                           </th>
                           <th scope="col" class="fw-bold">Comentario de SAE</th>
+                          <th scope="col" class="fw-bold">
+                            Fecha de solicitud finalizada
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let solicitud of solicitudes">
+                          <th scope="row" class="fw-bold">{{solicitud.idSolicitud}}</th>
+                          <td>{{solicitud.fechaSolicitud}}</td>
+                          <td>{{solicitud.placa}}</td>
+                          <td>{{solicitud.categoria}}</td>
+                          <td>{{solicitud.estado}}</td>
+                          <td class="comentario" style="cursor:pointer;" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#staticBackdrop' + solicitud.idSolicitud">
+                            Comentario
+                          </td>
+                          <div class="modal fade" [attr.id]="'staticBackdrop' + solicitud.idSolicitud"
+                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title fw-bold" id="staticBackdropLabel">
+                                    Comentario del SAE:
+                                  </h4>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <span>{{solicitud.comentario}}</span><br />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <td *ngIf="solicitud.fechaRespuesta != null">{{solicitud.fechaRespuesta}}</td>
+                          <td *ngIf="solicitud.fechaRespuesta == null">-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <span>Para más información, puedes ingresar a la sección 
+                      <a class="text-purple fw-bold" href="https://portal.utp.edu.pe/inicio/informacion-institucional" target="_blank">información
+                        institucional</a> en UTP+ portal.</span>
+                  </div>
+                  <!--TABLA PARA PERSONAL DE SAE-->
+                  <div *ngIf="this.rol === 'PERSONAL_SAE'" class="container table-responsive">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <p class="text-secondary mt-2 mb-0">
+                          Recuerda validar la solicitud antes de aceptarla según los estándares de validación de la UTP.
+                        </p>
+                      </div>
+                      <div class="col-md-4">
+                        <select class="form-select mt-2" aria-label="Default select example">
+                          <option selected value="1">
+                            2024 - Ciclo 1 Marzo
+                          </option>
+                          <option value="2">Verano 2024</option>
+                          <option value="3">2023 - Ciclo 1 Agosto</option>
+                        </select>
+                      </div>
+                    </div>
+                    <table class="table table-striped mt-5">
+                      <thead class="table-dark">
+                        <tr>
+                          <th scope="col" class="fw-bold">#</th>
+                          <th scope="col" class="fw-bold">
+                            Fecha de solicitud
+                          </th>
+                          <th scope="col" class="fw-bold">Placa</th>
+                          <th scope="col" class="fw-bold">Tipo de Vehículo</th>
+                          <th scope="col" class="fw-bold">
+                            Estado del trámite
+                          </th>
                           <th scope="col" class="fw-bold">
                             Fecha de solicitud finalizada
                           </th>

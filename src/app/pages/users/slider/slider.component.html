@@ -17,6 +17,12 @@
         <span class="link_name">Menú principal</span>
       </a>
     </li>
+    <li *ngIf="this.rol === 'PERSONAL_SAE'">
+      <a [routerLink]="['/solicitudes']">
+        <i class="bx bxs-car"></i>
+        <span class="link_name">Solicitudes de vehículo</span>
+      </a>
+    </li>
     <li *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
       <a [routerLink]="['/registro']">
         <i class="bx bxs-car"></i>

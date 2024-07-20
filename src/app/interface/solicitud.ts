@@ -5,6 +5,8 @@ export interface Solicitud {
   estado: string;
   idUsuario: number;
   idVehiculo: number;
+  comentario: string;
+  idUsuarioSae: number;
   placa: string;
   categoria: string;
 }

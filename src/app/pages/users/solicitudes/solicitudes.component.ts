@@ -35,7 +35,8 @@ export class SolicitudesComponent implements OnInit, AfterViewInit {
 
     if (
       this.loginService.role != 'ALUMNO' &&
-      this.loginService.role != 'DOCENTE'
+      this.loginService.role != 'DOCENTE' &&
+      this.loginService.role != 'PERSONAL_SAE'
     ) {
       Swal.fire(
         'Recurso prohibido',
@@ -63,6 +64,7 @@ export class SolicitudesComponent implements OnInit, AfterViewInit {
           solicitud.placa = vehiculo.vehiculo.placa;
           solicitud.categoria = vehiculo.vehiculo.categoria;
         })
+        console.log(solicitud);
         return solicitud;
       });
     });

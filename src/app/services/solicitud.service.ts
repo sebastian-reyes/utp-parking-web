@@ -11,6 +11,13 @@ import { SolicitudRequest } from '../interface/solicitudRequest';
 export class SolicitudService {
   constructor(private http: HttpClient) {}
 
+  listarSolicitudesSinAceptar():Observable<any>{
+    return this.http.get(`${environment.urlApi}/solicitudes/`).pipe(
+      map((response:any)=> response['solicitudes'] as Solicitud),
+      catchError(this.handleError)
+    );
+  }
+
   listarSolicitudes(id: any): Observable<any> {
     return this.http.get(`${environment.urlApi}/solicitudes/${id}`).pipe(
       map((response: any) => response['solicitudes'] as Solicitud[]),
@@ -24,6 +31,7 @@ export class SolicitudService {
       .post<any>(`${environment.urlApi}/solicitudes/registro`, solicitud)
       .pipe(catchError(this.handleError));
   }
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
