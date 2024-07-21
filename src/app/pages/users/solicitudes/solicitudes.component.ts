@@ -17,7 +17,7 @@ export class SolicitudesComponent implements OnInit, AfterViewInit {
   public solicitudes: Solicitud[] = [];
 
   constructor(
-    private loginService: LoginService,
+    public loginService: LoginService,
     private router: Router,
     private solicitudService: SolicitudService,
     private vehiculoService: VehiculoService,
@@ -64,7 +64,6 @@ export class SolicitudesComponent implements OnInit, AfterViewInit {
           solicitud.placa = vehiculo.vehiculo.placa;
           solicitud.categoria = vehiculo.vehiculo.categoria;
         })
-        console.log(solicitud);
         return solicitud;
       });
     });

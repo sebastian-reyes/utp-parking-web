@@ -19,10 +19,15 @@
                           Puedes ver todos las solicitudes que realizaste aquí.
                         </p>
                         <a class="text-purple fw-bold" [routerLink]="['/registro']">Registra una nueva solicitud
-                          aquí</a>
+                          aquí</a><br /><br />
+                        <span>Para más información, puedes ingresar a la sección
+                          <a class="text-purple fw-bold"
+                            href="https://portal.utp.edu.pe/inicio/informacion-institucional"
+                            target="_blank">información
+                            institucional</a> en UTP+ portal.</span>
                       </div>
                       <div class="col-md-4">
-                        <select class="form-select mt-2" aria-label="Default select example">
+                        <select class="form-select" aria-label="Default select example">
                           <option selected value="1">
                             2024 - Ciclo 1 Marzo
                           </option>
@@ -31,7 +36,7 @@
                         </select>
                       </div>
                     </div>
-                    <table class="table table-striped mt-5">
+                    <table class="table table-striped mt-3">
                       <thead class="table-dark">
                         <tr>
                           <th scope="col" class="fw-bold">#</th>
@@ -83,9 +88,7 @@
                         </tr>
                       </tbody>
                     </table>
-                    <span>Para más información, puedes ingresar a la sección 
-                      <a class="text-purple fw-bold" href="https://portal.utp.edu.pe/inicio/informacion-institucional" target="_blank">información
-                        institucional</a> en UTP+ portal.</span>
+                    <a class="btn btn-success" target="_blank" href="http://localhost:9898/api/v0/export/solicitudes/{{loginService.codigo}}">Exportar en excel</a><br />
                   </div>
                   <!--TABLA PARA PERSONAL DE SAE-->
                   <div *ngIf="this.rol === 'PERSONAL_SAE'" class="container table-responsive">
