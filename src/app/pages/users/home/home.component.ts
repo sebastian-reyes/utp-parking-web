@@ -23,6 +23,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/login']);
     }
     this.rol = this.loginService.role;
+    if(this.rol === 'JEFE_SEGURIDAD'){
+      this.router.navigate(['/seguridad/listar']);
+    }
   }
 
   ngAfterViewInit(): void {

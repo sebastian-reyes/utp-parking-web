@@ -7,7 +7,7 @@
   </div>
   <ul class="nav-list">
     <li>
-      <a [routerLink]="['/']">
+      <a [routerLink]="['/']" *ngIf="this.rol !== 'JEFE_SEGURIDAD'">
         <i class="bx bxs-home-alt-2"></i>
         <span class="link_name">Menú principal</span>
       </a>
