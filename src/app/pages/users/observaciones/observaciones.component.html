@@ -1,0 +1,35 @@
+<app-slider />
+<section class="home-section">
+    <app-navbar />
+    <div class="container">
+        <div class="container p-4 mt-2">
+            <h2 class="fw-bold text-center">Formulario de registro de observaciones</h2>
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 p-3">
+                        <div class="card p-2 border-light">
+                            <div class="card-body">
+                                <span class="text-dark">
+                                    Ingrese detalles precisos sobre la oservación que se le hará al vehículo.
+                                </span><br />
+                                <a class="text-purple fw-bold" [routerLink]="['/observaciones/listar']">Mira todas las
+                                    observaciones aquí</a>
+                                <form [formGroup]="observacionForm" class="mt-3">
+                                    <label class="form-label mt-2"> Placa: </label>
+                                    <input type="text" formControlName="placa" class="form-control border-dark" />
+                                    <label class="form-label mt-2"> Observación: </label>
+                                    <textarea class="form-control border-dark" formControlName="comentario" id="exampleFormControlTextarea1"
+                                        rows="3"></textarea>
+                                    <button type="button" class="btn btn-login fw-bold p-2 mt-4"
+                                        (click)="registrarObservacion()">
+                                        Registrar Observación
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

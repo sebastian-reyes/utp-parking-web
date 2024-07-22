@@ -36,13 +36,13 @@
       </a>
     </li>
     <li *ngIf="this.rol === 'SEGURIDAD'">
-      <a href="#">
+      <a [routerLink]="['/observaciones']">
         <i class="bx bxs-pencil"></i>
         <span class="link_name">Registrar Observación</span>
       </a>
     </li>
     <li *ngIf="this.rol === 'SEGURIDAD'">
-      <a href="#">
+      <a [routerLink]="['/observaciones/listar']">
         <i class="bx bx-list-ul"></i>
         <span class="link_name">Ver Observaciones</span>
       </a>

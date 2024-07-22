@@ -78,6 +78,36 @@ export class RegistroComponent implements OnInit, AfterViewInit {
     this.rol = this.loginService.role;
   }
 
+  registrar(): void {
+    let placa = this.solicitudForm.value.placa?.replace(/\s/g, '');
+    if (this.solicitudForm.value.acepted == true && placa != '') {
+      this.vehiculoRequest.categoria =
+        this.solicitudForm.value.categoria?.categoria;
+      this.vehiculoRequest.placa = placa;
+      this.vehiculoRequest.id_usuario = this.loginService.id;
+      this.vehiculoService.registrarVehiculo(this.vehiculoRequest).subscribe({
+        next: () => {
+          this.vehiculoService.obtenerVehiculo(placa).subscribe((data) => {
+            this.id = data.vehiculo.id_vehiculo;
+            this.solicitudRequest.id_usuario = this.loginService.id;
+            this.solicitudRequest.id_vehiculo = data.vehiculo.id_vehiculo;
+            this.solicitudService
+              .registrarSolicitud(this.solicitudRequest)
+              .subscribe({
+                next: () => {
+                  Swal.fire('Solicitud registrada', 'Gracias', 'success');
+                  this.router.navigate(['/solicitudes'])
+                  console.log(this.solicitudRequest);
+                },
+              });
+          });
+        },
+      });
+    } else {
+      Swal.fire('Error', 'Llenar campos obligatorios', 'error');
+    }
+  }
+
   ngAfterViewInit(): void {
     const sidebar: HTMLElement | null = document.querySelector('.sidebar');
     const logo: HTMLElement | null = document.querySelector('.logo_details');
@@ -116,35 +146,5 @@ export class RegistroComponent implements OnInit, AfterViewInit {
         sidebar.style.visibility = 'hidden';
       }
     });
-  }
-
-  registrar(): void {
-    let placa = this.solicitudForm.value.placa?.replace(/\s/g, '');
-    if (this.solicitudForm.value.acepted == true && placa != '') {
-      this.vehiculoRequest.categoria =
-        this.solicitudForm.value.categoria?.categoria;
-      this.vehiculoRequest.placa = placa;
-      this.vehiculoRequest.id_usuario = this.loginService.id;
-      this.vehiculoService.registrarVehiculo(this.vehiculoRequest).subscribe({
-        next: () => {
-          this.vehiculoService.obtenerVehiculo(placa).subscribe((data) => {
-            this.id = data.vehiculo.id_vehiculo;
-            this.solicitudRequest.id_usuario = this.loginService.id;
-            this.solicitudRequest.id_vehiculo = data.vehiculo.id_vehiculo;
-            this.solicitudService
-              .registrarSolicitud(this.solicitudRequest)
-              .subscribe({
-                next: () => {
-                  Swal.fire('Solicitud registrada', 'Gracias', 'success');
-                  this.router.navigate(['/solicitudes'])
-                  console.log(this.solicitudRequest);
-                },
-              });
-          });
-        },
-      });
-    } else {
-      Swal.fire('Error', 'Llenar campos obligatorios', 'error');
-    }
   }
 }

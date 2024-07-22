@@ -17,6 +17,8 @@ import { ErrorInterceptorService } from './services/auth/error-interceptor.servi
 import { RegistroComponent } from './pages/users/registro/registro.component';
 import { SolicitudesComponent } from './pages/users/solicitudes/solicitudes.component';
 import { DatePipe } from '@angular/common';
+import { ObservacionesComponent } from './pages/users/observaciones/observaciones.component';
+import { ListarObservacionesComponent } from './pages/users/listar-observaciones/listar-observaciones.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { DatePipe } from '@angular/common';
     FooterComponent,
     RegistroComponent,
     SolicitudesComponent,
+    ObservacionesComponent,
+    ListarObservacionesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+.text-purple {
+    color: #700d70;
+}
+
+.comentario {
+    color: blue;
+    text-decoration: underline;
+}
+
+.table-modified > :not(caption) > * > * {
+    background-color: transparent !important; /* O el color que prefieras */
+}

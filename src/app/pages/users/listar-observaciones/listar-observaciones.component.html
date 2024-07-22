@@ -1,0 +1,92 @@
+<div>
+    <app-slider />
+    <section class="home-section">
+        <app-navbar />
+        <div class="container">
+            <div class="container p-4 mt-2">
+                <h2 class="fw-bold text-center">Observaciones</h2>
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 p-3">
+                            <div class="card p-2 border-light">
+                                <div class="card-body">
+                                    <div class="container table-responsive">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <p class="text-secondary mt-2 mb-0">
+                                                    Puedes ver todos las observaciones aquí.
+                                                </p>
+                                                <a class="text-purple fw-bold"
+                                                    [routerLink]="['/observaciones']">Registra una nueva observación
+                                                    aquí</a>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <select class="form-select" aria-label="Default select example">
+                                                    <option selected value="1">
+                                                        2024 - Ciclo 1 Marzo
+                                                    </option>
+                                                    <option value="2">Verano 2024</option>
+                                                    <option value="3">2023 - Ciclo 1 Agosto</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <table class="table table-striped mt-3">
+                                            <thead class="table-dark">
+                                                <tr>
+                                                    <th scope="col" class="fw-bold">#</th>
+                                                    <th scope="col" class="fw-bold">
+                                                        Fecha de ingreso
+                                                    </th>
+                                                    <th scope="col" class="fw-bold">
+                                                        Fecha de salida
+                                                    </th>
+                                                    <th scope="col" class="fw-bold">Placa</th>
+                                                    <th scope="col" class="fw-bold">
+                                                        Observación
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let registro of registros">
+                                                    <th scope="row" class="fw-bold">{{registro.id_registro}}</th>
+                                                    <th scope="row">{{registro.fecha_ingreso}}</th>
+                                                    <th scope="row">{{registro.fecha_salida}}</th>
+                                                    <th scope="row">{{registro.placaVehiculo}}</th>
+                                                    <th scope="row" class="comentario" style="cursor:pointer;"
+                                                        data-bs-toggle="modal"
+                                                        [attr.data-bs-target]="'#staticBackdrop' + registro.id_registro">
+                                                        Observación</th>
+                                                    <div class="modal fade"
+                                                        [attr.id]="'staticBackdrop' + registro.id_registro"
+                                                        data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title fw-bold"
+                                                                        id="staticBackdropLabel">
+                                                                        Observación del personal de Seguridad:
+                                                                    </h4>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <span>{{registro.observacion}}</span><br />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
