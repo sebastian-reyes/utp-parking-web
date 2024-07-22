@@ -1,0 +1,90 @@
+<app-slider />
+<section class="home-section">
+    <app-navbar />
+    <div class="container">
+        <div class="container p-3 mt-2">
+            <h2 class="fw-bold text-center mt-2">Listado de personal</h2>
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-12 p-3">
+                        <div class="card p-2 border-light">
+                            <div class="card-body">
+                                <div class="container table-responsive">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p class="text-secondary mt-2 mb-0">
+                                                Puedes ver todos los usuarios de seguridad aquí.
+                                            </p>
+                                            <a class="text-purple fw-bold" [routerLink]="['/seguridad/registrar']">Registra
+                                                un nuevo usuario
+                                                aquí</a>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped mt-3">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col" class="fw-bold">ID Usuario</th>
+                                                <th scope="col" class="fw-bold">
+                                                    Código
+                                                </th>
+                                                <th scope="col" class="fw-bold">
+                                                    Apellidos
+                                                </th>
+                                                <th scope="col" class="fw-bold">
+                                                    Nombres
+                                                </th>
+                                                <th scope="col" class="fw-bold">
+                                                    Correo Insitucional
+                                                </th>
+                                                <th scope="col" class="fw-bold">DNI</th>
+                                                <th scope="col" class="fw-bold">Activo</th>
+                                                <!--th scope="col" class="fw-bold">Editar</th-->
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let usuario of usuariosSeguridad">
+                                                <th scope="row" class="fw-bold">{{usuario.idUsuario}}</th>
+                                                <th scope="row">{{usuario.username}}</th>
+                                                <th scope="row">{{usuario.apellidos}}</th>
+                                                <th scope="row">{{usuario.nombres}}</th>
+                                                <th scope="row">{{usuario.correoInstitucional}}</th>
+                                                <th scope="row">{{usuario.dni}}</th>
+                                                <th scope="row" *ngIf="usuario.matriculado == true">SÍ</th>
+                                                <th scope="row" *ngIf="usuario.matriculado == false">NO</th>
+                                                <!--th scope="row" class="comentario" style="cursor:pointer;">
+                                                    <button class="btn btn-info" data-bs-toggle="modal"
+                                                        [attr.data-bs-target]="'#staticBackdrop' + usuario.idUsuario"s>Editar</button>
+                                                </th>
+                                                <div class="modal fade" [attr.id]="'staticBackdrop' + usuario.idUsuario"
+                                                    data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title fw-bold"
+                                                                    id="staticBackdropLabel">
+                                                                    Editar Usuario N° {{usuario.idUsuario}}
+                                                                </h4>
+                                                                <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div-->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <a class="btn btn-success" target="_blank"
+                                        href="http://localhost:9898/api/v0/export/seguridad">Exportar en
+                                        excel</a><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

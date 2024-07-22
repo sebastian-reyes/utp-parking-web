@@ -14,20 +14,11 @@
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <p class="text-secondary mt-2 mb-0">
-                                                    Puedes ver todos las observaciones aquí.
+                                                    Puedes ver todos los registros que cuentan con observaciones aquí.
                                                 </p>
                                                 <a class="text-purple fw-bold"
                                                     [routerLink]="['/observaciones']">Registra una nueva observación
                                                     aquí</a>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected value="1">
-                                                        2024 - Ciclo 1 Marzo
-                                                    </option>
-                                                    <option value="2">Verano 2024</option>
-                                                    <option value="3">2023 - Ciclo 1 Agosto</option>
-                                                </select>
                                             </div>
                                         </div>
                                         <table class="table table-striped mt-3">
@@ -38,24 +29,34 @@
                                                         Fecha de ingreso
                                                     </th>
                                                     <th scope="col" class="fw-bold">
+                                                        Hora de ingreso
+                                                    </th>
+                                                    <th scope="col" class="fw-bold">
                                                         Fecha de salida
                                                     </th>
-                                                    <th scope="col" class="fw-bold">Placa</th>
                                                     <th scope="col" class="fw-bold">
-                                                        Observación
+                                                        Hora de salida
+                                                    </th>
+                                                    <th scope="col" class="fw-bold">Placa</th>
+                                                    <th scope="col" class="fw-bold">Sede</th>
+                                                    <th scope="col" class="fw-bold">
+                                                        Detalle
                                                     </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let registro of registros">
                                                     <th scope="row" class="fw-bold">{{registro.id_registro}}</th>
-                                                    <th scope="row">{{registro.fecha_ingreso}}</th>
-                                                    <th scope="row">{{registro.fecha_salida}}</th>
+                                                    <th scope="row">{{registro.formatted_fecha_ingreso?.fecha}}</th>
+                                                    <th scope="row">{{registro.formatted_fecha_ingreso?.hora}}</th>
+                                                    <th scope="row">{{registro.formatted_fecha_salida?.fecha}}</th>
+                                                    <th scope="row">{{registro.formatted_fecha_salida?.hora}}</th>
                                                     <th scope="row">{{registro.placaVehiculo}}</th>
+                                                    <th scope="row">{{registro.nombreSede}}</th>
                                                     <th scope="row" class="comentario" style="cursor:pointer;"
                                                         data-bs-toggle="modal"
                                                         [attr.data-bs-target]="'#staticBackdrop' + registro.id_registro">
-                                                        Observación</th>
+                                                        Detalle</th>
                                                     <div class="modal fade"
                                                         [attr.id]="'staticBackdrop' + registro.id_registro"
                                                         data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
@@ -65,13 +66,24 @@
                                                                 <div class="modal-header">
                                                                     <h4 class="modal-title fw-bold"
                                                                         id="staticBackdropLabel">
-                                                                        Observación del personal de Seguridad:
+                                                                        Detalle del registro N°
+                                                                        {{registro.id_registro}}:
                                                                     </h4>
                                                                     <button type="button" class="btn-close"
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
+                                                                    <span class="fw-bold">Placa del
+                                                                        vehículo:
+                                                                    </span>{{registro.placaVehiculo}}<br />
+                                                                    <span class="fw-bold">Código de Usuario:
+                                                                    </span>{{registro.codigoUsuario}}<br />
+                                                                    <span class="fw-bold">Nombre:
+                                                                    </span>{{registro.nombreUsuario}}<br />
+                                                                    <span class="fw-bold">Sede:
+                                                                    </span>{{registro.nombreSede}}<br />
+                                                                    <span class="fw-bold">Observación:</span><br />
                                                                     <span>{{registro.observacion}}</span><br />
                                                                 </div>
                                                             </div>

@@ -1,12 +1,7 @@
 <div class="sidebar">
   <div class="logo_details">
     <div class="logo_name">
-      <img
-        src="../../../../assets/images/logo.png"
-        alt="Logo"
-        width="180"
-        class="d-inline-block align-text-top"
-      />
+      <img src="../../../../assets/images/logo.png" alt="Logo" width="180" class="d-inline-block align-text-top" />
     </div>
     <i class="bx bx-menu-alt-right" id="btn"></i>
   </div>
@@ -47,6 +42,18 @@
         <span class="link_name">Ver Observaciones</span>
       </a>
     </li>
+    <li *ngIf="this.rol === 'JEFE_SEGURIDAD'">
+      <a [routerLink]="['/seguridad/registrar']">
+        <i class="bx bxs-pencil"></i>
+        <span class="link_name">Registrar nuevo personal</span>
+      </a>
+    </li>
+    <li *ngIf="this.rol === 'JEFE_SEGURIDAD'">
+      <a [routerLink]="['/seguridad/listar']">
+        <i class="bx bx-list-ul"></i>
+        <span class="link_name">Ver personal</span>
+      </a>
+    </li>
     <li>
       <a href="#">
         <i class="bx bx-question-mark"></i>
@@ -61,11 +68,7 @@
     </li>
     <li class="profile">
       <div class="profile_details">
-        <img
-          src="../../../../assets/images/student.42525dea.svg"
-          alt="profile image"
-          class="p-1"
-        />
+        <img src="../../../../assets/images/student.42525dea.svg" alt="profile image" class="p-1" />
         <div class="profile_content">
           <div class="name fw-bold">{{ nombre }} {{ apellido }}</div>
           <div class="designation">{{ codigo }}</div>

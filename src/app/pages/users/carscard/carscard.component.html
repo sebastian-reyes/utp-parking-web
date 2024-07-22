@@ -37,6 +37,9 @@
   </p>
 </div>
 <hr />
+<div *ngIf="this.rol === 'JEFE_SEGURIDAD'" class="mt-2 p-2 mb-5">
+    <h2 class="fw-bold">Cantidad de Usuarios de Seguridad</h2>
+</div>
 <div *ngIf="this.rol === 'SEGURIDAD'" class="mt-2 p-2 mb-5">
   <div class="row">
     <div class="col-md-12">

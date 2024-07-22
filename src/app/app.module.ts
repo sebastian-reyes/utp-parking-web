@@ -19,6 +19,8 @@ import { SolicitudesComponent } from './pages/users/solicitudes/solicitudes.comp
 import { DatePipe } from '@angular/common';
 import { ObservacionesComponent } from './pages/users/observaciones/observaciones.component';
 import { ListarObservacionesComponent } from './pages/users/listar-observaciones/listar-observaciones.component';
+import { JefeSeguridadComponent } from './pages/users/jefe-seguridad/jefe-seguridad.component';
+import { JefeSeguridadGuardarComponent } from './pages/users/jefe-seguridad-guardar/jefe-seguridad-guardar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ListarObservacionesComponent } from './pages/users/listar-observaciones
     SolicitudesComponent,
     ObservacionesComponent,
     ListarObservacionesComponent,
+    JefeSeguridadComponent,
+    JefeSeguridadGuardarComponent,
   ],
   imports: [
     BrowserModule,
