@@ -7,15 +7,15 @@
   </div>
   <ul class="nav-list">
     <li>
-      <a [routerLink]="['/']" *ngIf="this.rol !== 'JEFE_SEGURIDAD'">
+      <a [routerLink]="['/']" *ngIf="this.rol !== 'JEFE_SEGURIDAD' && this.rol !== 'PERSONAL_SAE'">
         <i class="bx bxs-home-alt-2"></i>
         <span class="link_name">Menú principal</span>
       </a>
     </li>
     <li *ngIf="this.rol === 'PERSONAL_SAE'">
       <a [routerLink]="['/solicitudes']">
-        <i class="bx bxs-car"></i>
-        <span class="link_name">Solicitudes de vehículo</span>
+        <i class="bx bx-list-ul"></i>
+        <span class="link_name">Solicitudes de ingreso</span>
       </a>
     </li>
     <li *ngIf="this.rol === 'ALUMNO' || this.rol === 'DOCENTE'">
@@ -54,7 +54,7 @@
         <span class="link_name">Ver personal</span>
       </a>
     </li>
-    <li>
+    <!--li>
       <a href="#">
         <i class="bx bx-question-mark"></i>
         <span class="link_name">Ayuda</span>
@@ -65,7 +65,7 @@
         <i class="bx bx-info-circle"></i>
         <span class="link_name">Reportar un problema</span>
       </a>
-    </li>
+    </li-->
     <li class="profile">
       <div class="profile_details">
         <img src="../../../../assets/images/student.42525dea.svg" alt="profile image" class="p-1" />

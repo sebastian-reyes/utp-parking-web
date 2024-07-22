@@ -26,15 +26,16 @@
                             target="_blank">información
                             institucional</a> en UTP+ portal.</span>
                       </div>
-                      <div class="col-md-4">
+                      <!--div class="col-md-4">
                         <select class="form-select" aria-label="Default select example">
                           <option selected value="1">
-                            2024 - Ciclo 1 Marzo
+                            Todas
                           </option>
-                          <option value="2">Verano 2024</option>
-                          <option value="3">2023 - Ciclo 1 Agosto</option>
+                          <option value="2">Aceptadas</option>
+                          <option value="3">Rechazadas</option>
+                          <option value="4">Por verificar</option>
                         </select>
-                      </div>
+                      </div-->
                     </div>
                     <table class="table table-striped mt-3">
                       <thead class="table-dark">
@@ -88,7 +89,9 @@
                         </tr>
                       </tbody>
                     </table>
-                    <a class="btn btn-success" target="_blank" href="http://localhost:9898/api/v0/export/solicitudes/{{loginService.codigo}}">Exportar en excel</a><br />
+                    <a class="btn btn-success" target="_blank"
+                      href="http://localhost:9898/api/v0/export/solicitudes/{{loginService.codigo}}">Exportar en
+                      excel</a><br />
                   </div>
                   <!--TABLA PARA PERSONAL DE SAE-->
                   <div *ngIf="this.rol === 'PERSONAL_SAE'" class="container table-responsive">
@@ -98,15 +101,16 @@
                           Recuerda validar la solicitud antes de aceptarla según los estándares de validación de la UTP.
                         </p>
                       </div>
-                      <div class="col-md-4">
-                        <select class="form-select mt-2" aria-label="Default select example">
+                      <!--div class="col-md-4">
+                        <select class="form-select" aria-label="Default select example">
                           <option selected value="1">
-                            2024 - Ciclo 1 Marzo
+                            Todas
                           </option>
-                          <option value="2">Verano 2024</option>
-                          <option value="3">2023 - Ciclo 1 Agosto</option>
+                          <option value="2">Aceptadas</option>
+                          <option value="3">Rechazadas</option>
+                          <option value="4">Por verificar</option>
                         </select>
-                      </div>
+                      </div-->
                     </div>
                     <table class="table table-striped mt-5">
                       <thead class="table-dark">
@@ -123,21 +127,73 @@
                           <th scope="col" class="fw-bold">
                             Fecha de solicitud finalizada
                           </th>
+                          <th scope="col" class="fw-bold">
+                            Aceptar Solicitud
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let solicitud of solicitudes">
+                        <tr *ngFor="let solicitud of solicitudesNoAceptadas">
                           <th scope="row" class="fw-bold">{{solicitud.idSolicitud}}</th>
                           <td>{{solicitud.fechaSolicitud}}</td>
                           <td>{{solicitud.placa}}</td>
                           <td>{{solicitud.categoria}}</td>
                           <td>{{solicitud.estado}}</td>
-                          <td class="comentario">Comentario</td>
                           <td *ngIf="solicitud.fechaRespuesta != null">{{solicitud.fechaRespuesta}}</td>
                           <td *ngIf="solicitud.fechaRespuesta == null">-</td>
+                          <td>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                              [attr.data-bs-target]="'#exampleModal'+solicitud.idSolicitud">
+                              Validar Solicitud
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" [attr.id]="'exampleModal'+solicitud.idSolicitud" tabindex="-1"
+                              aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-lg modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Solicitud de Ingreso N°
+                                      {{solicitud.idSolicitud}}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                      aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <span class="fw-bold">Placa: {{solicitud.placa}}</span><br />
+                                    <span class="fw-bold">Tipo de vehículo: </span>{{solicitud.categoria}}<br />
+                                    <span class="fw-bold">Apellidos: </span>{{solicitud.apellidos}}<br />
+                                    <span class="fw-bold">Nombres: </span>{{solicitud.nombres}}<br />
+                                    <span class="fw-bold">Correo: </span>{{solicitud.correoInstitucional}}<br />
+                                    <span class="fw-bold">Categoría: </span>{{solicitud.role}}<br />
+                                    <span class="fw-bold">Categoría: </span>{{solicitud.dni}}<br />
+                                    <span *ngIf="solicitud.matriculado == true" class="fw-bold">Se encuentra
+                                      matriculado: SÍ</span><br />
+                                    <span *ngIf="solicitud.matriculado == false" class="fw-bold">Se encuentra
+                                      matriculado: NO</span><br />
+                                    <form [formGroup]="comentarioForm">
+                                      <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Ingrese un
+                                          comentario</label>
+                                        <textarea class="form-control" formControlName="comentario"
+                                          id="exampleFormControlTextarea1" rows="3"></textarea>
+                                      </div>
+                                    </form>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                      (click)="denegarSolicitud(solicitud.idSolicitud)">Denegar</button>
+                                    <button type="button" (click)="aceptarSolicitud(solicitud.idSolicitud)"
+                                      class="btn btn-success">Aceptar</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
+                    <a class="btn btn-success" target="_blank"
+                      href="http://localhost:9898/api/v0/export/solicitudes">Exportar en
+                      excel</a><br />
                   </div>
                 </div>
               </div>

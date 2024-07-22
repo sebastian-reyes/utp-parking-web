@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { RegistrosService } from '../../../services/registros.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { responderSolicitudRequest } from '../../../interface/responderSolicitudRequest';
 
 @Component({
   selector: 'app-carscard',
@@ -19,16 +20,16 @@ export class CarscardComponent implements OnInit {
   public rol: any;
   public activo: boolean = false;
   public cantidad: number = 0;
-  registroRequest: RegistroRequest = {
-    idEstacionamiento: 0,
-    idUsuarioSeguridad: 0,
-    placa: '',
-  };
   public idSede: any;
   public infoSede: string = '';
   public nombreSede: string = 'Ingrese en qué sede está laborando';
   public infoBoton: string = 'Ingresar sede';
   public fechaFormateada: string = '';
+  registroRequest: RegistroRequest = {
+    idEstacionamiento: 0,
+    idUsuarioSeguridad: 0,
+    placa: '',
+  };
 
   constructor(
     private loginService: LoginService,
@@ -36,7 +37,7 @@ export class CarscardComponent implements OnInit {
     private router: Router,
     private registroService: RegistrosService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginService.currentUserLoginOn.subscribe({

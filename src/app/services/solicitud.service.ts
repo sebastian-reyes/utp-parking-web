@@ -4,16 +4,18 @@ import { Observable, catchError, map, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { Solicitud } from '../interface/solicitud';
 import { SolicitudRequest } from '../interface/solicitudRequest';
+import { responderSolicitudRequest } from '../interface/responderSolicitudRequest';
+import { comentarioRequest } from '../interface/comentarioRequest';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SolicitudService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  listarSolicitudesSinAceptar():Observable<any>{
-    return this.http.get(`${environment.urlApi}/solicitudes/`).pipe(
-      map((response:any)=> response['solicitudes'] as Solicitud),
+  listarSolicitudesSinAceptar(): Observable<any> {
+    return this.http.get(`${environment.urlApi}/solicitudes`).pipe(
+      map((response: any) => response['solicitudes'] as Solicitud[]),
       catchError(this.handleError)
     );
   }
@@ -32,6 +34,17 @@ export class SolicitudService {
       .pipe(catchError(this.handleError));
   }
 
+  aceptarSolicitud(idSolicitud: number, respuesta: responderSolicitudRequest) {
+    return this.http
+      .patch(`${environment.urlApi}/solicitudes/respuesta/${idSolicitud}`, respuesta)
+      .pipe(catchError(this.handleError));
+  }
+
+  agregarComentario(idSolicitud: number, comentario: comentarioRequest) {
+    return this.http
+      .patch(`${environment.urlApi}/solicitudes/respuesta/comentario/${idSolicitud}`, comentario)
+      .pipe(catchError(this.handleError));
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {

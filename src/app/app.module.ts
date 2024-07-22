@@ -21,6 +21,7 @@ import { ObservacionesComponent } from './pages/users/observaciones/observacione
 import { ListarObservacionesComponent } from './pages/users/listar-observaciones/listar-observaciones.component';
 import { JefeSeguridadComponent } from './pages/users/jefe-seguridad/jefe-seguridad.component';
 import { JefeSeguridadGuardarComponent } from './pages/users/jefe-seguridad-guardar/jefe-seguridad-guardar.component';
+import { PersonalSaeComponent } from './pages/users/personal-sae/personal-sae.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { JefeSeguridadGuardarComponent } from './pages/users/jefe-seguridad-guar
     ListarObservacionesComponent,
     JefeSeguridadComponent,
     JefeSeguridadGuardarComponent,
+    PersonalSaeComponent,
   ],
   imports: [
     BrowserModule,

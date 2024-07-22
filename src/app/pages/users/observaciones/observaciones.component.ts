@@ -33,7 +33,7 @@ export class ObservacionesComponent implements AfterViewInit {
       this.observacionRequest.comentario = this.observacionForm.value.comentario
       this.observacionService.registrarObservacion(this.observacionForm.value.placa, this.observacionRequest).subscribe({
         next: () => {
-          Swal.fire('Solicitud registrada', 'Gracias', 'success');
+          Swal.fire('Observación registrada', 'Se proederá con el análisis de dicha observación, gracias', 'success');
           this.router.navigate(['/observaciones/listar'])
         }
       })
@@ -81,5 +81,4 @@ export class ObservacionesComponent implements AfterViewInit {
       }
     });
   }
-
 }

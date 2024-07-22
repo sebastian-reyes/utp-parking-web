@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit, AfterViewInit {
   public rol: any;
 
-  constructor(private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
     if (!this.loginService.estaAutenticado()) {
@@ -23,8 +23,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.router.navigate(['/login']);
     }
     this.rol = this.loginService.role;
-    if(this.rol === 'JEFE_SEGURIDAD'){
+    if (this.rol === 'JEFE_SEGURIDAD') {
       this.router.navigate(['/seguridad/listar']);
+    }
+    else if (this.rol === 'PERSONAL_SAE') {
+      this.router.navigate(['/solicitudes']);
     }
   }
 
